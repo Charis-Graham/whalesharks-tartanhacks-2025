@@ -8,8 +8,9 @@ const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 
 let renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-renderer.setClearColor(0xffffff, 1);
+renderer.setClearColor(0x000000, 0);
 renderer.setSize(window.innerWidth, window.innerHeight);
+
 document.body.appendChild(renderer.domElement);
 const effect = new OutlineEffect(renderer, {
     defaultColor: [1.0, 1.0, 1.0],
@@ -74,15 +75,18 @@ function onWindowResize() {
 
 document.addEventListener('click', onClick, false);
 function onClick(event) {
-    pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
-    pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
+  const rect = renderer.domElement.getBoundingClientRect();
+  
+
+  pointer.x = ((event.clientX - rect.left) / rect.width)  * 2 - 1;
+  pointer.y = -((event.clientY - rect.top)  / rect.height) * 2 + 1;
     raycaster.setFromCamera(pointer, camera);
     const intersects = raycaster.intersectObjects(scene.children, false);
     if (intersects.length > 0) {
         const intersectedObject = intersects[0].object;
 
         const tile = intersectedObject.userData.tile;
-        if (tile && tile.land) tile.setHeight(tile.getHeight+1);
+        if (tile && tile.land) tile.setHeight(((tile.getHeight+1) % 9) + 1);
     }
 }
 
@@ -101,10 +105,10 @@ const land = new THREE.MeshPhongMaterial({ color: 0x00ff00 , flatShading : true}
 const water = material; // new THREE.MeshPhongMaterial({ color: 0x0000ff , flatShading : true});
 
 
-// const hexWorld = new HexWorld(land, true);
-// hexWorld.generateHexGrid(8, 8, 1);
-// const tileMeshes = hexWorld.getTileMeshes();
-// tileMeshes.forEach(mesh => scene.add(mesh));
+const hexWorld = new HexWorld(land, true);
+hexWorld.generateHexGrid(8, 8, 0);
+const tileMeshes = hexWorld.getTileMeshes();
+tileMeshes.forEach(mesh => scene.add(mesh));
 
 const waterWorld = new HexWorld(water, false);
 waterWorld.generateHexGrid(8, 8, 1);
