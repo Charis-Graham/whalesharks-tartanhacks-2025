@@ -1,4 +1,5 @@
-import * as THREE from 'three';
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@latest/build/three.module.js';
+
 import { MapControls } from 'three/addons/controls/MapControls.js';
 import { HexWorld } from './hex-world.js';
 import { OutlineEffect } from 'three/addons/effects/OutlineEffect.js';
@@ -15,7 +16,7 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 
 document.body.appendChild(renderer.domElement);
 const effect = new OutlineEffect(renderer, {
-  defaultColor: [1.0, 1.0, 1.0],
+  defaultColor: [0,0,0],
 });
 
 // water shader
@@ -66,10 +67,10 @@ dirtTexture.encoding = THREE.sRGBEncoding;
 // dirtTexture.repeat.set( 4, 4 );
 
 
-let dirtColor = new THREE.Color('rgb(247, 190, 164)');
-let grassColor = new THREE.Color('rgb(108, 229, 112)');
+let dirtColor = new THREE.Color('rgb(255, 250, 241)');
+let grassColor = new THREE.Color('rgb(158, 235, 161)');
 let treeColor = new THREE.Color('rgb(77, 202, 164)');
-let rockColor = new THREE.Color('rgb(187, 187, 187)');
+let rockColor = new THREE.Color('rgb(177, 183, 183)');
 const dirtMaterial = new THREE.MeshStandardMaterial({ color: dirtColor, map: dirtTexture, flatShading: true, });
 const grassMaterial = new THREE.MeshStandardMaterial({ color: grassColor, map: dirtTexture, flatShading: true, });
 const rockMaterial = new THREE.MeshStandardMaterial({ color: rockColor, map: dirtTexture, flatShading: true, });
@@ -172,7 +173,7 @@ loader.load(
 camera.position.set(0, 40, 40);
 camera.lookAt(0, 0, 0);
 
-const ambientLight = new THREE.AmbientLight(0xedd9c2, .5);
+const ambientLight = new THREE.AmbientLight(0xedd9c2, 1);
 scene.add(ambientLight);
 const dirLight = new THREE.DirectionalLight(0xedd9c2, 3);
 dirLight.position.set(100, 100, 100);
@@ -215,7 +216,7 @@ function addTreesToHexes() {
 
 
 sea = new THREE.Mesh(
-  new THREE.CylinderGeometry(30,30,.3,50),
+  new THREE.CylinderGeometry(20,20,.3,50),
   waterShader
   /*new THREE.MeshPhysicalMaterial({
     color: new THREE.Color('rgb(110, 226, 255)'),
