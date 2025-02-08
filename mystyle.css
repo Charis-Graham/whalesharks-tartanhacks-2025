@@ -12,8 +12,7 @@ html {
 
 
 :root {
-
-
+  
   --bright: #e6a19e;
   --dark: #5a548a;
   --overall-background: white;
@@ -96,7 +95,7 @@ body {
 }
 
 #split {
-  color: var(--icon-col);
+  color: var(--icon-hov);
   padding:0px 0px 20px 40px;
 }
 
@@ -224,23 +223,44 @@ body {
   
 }
 
-.display-buttons button {
+#opt1 {
   color: var(--navbar-icon);
   text-align: center;
   padding: 14px 22px;
   text-decoration: none;
   font-size: 17px;
-  background-color: var(--navbar-col);
+  background: var(--navbar-col);
   border-radius: 25px;
   margin-left: 10px;
   border: var(--navbar-col);
+  cursor: pointer;
 }
 
-
-.display-buttons button:hover {
-  color: var(--navbar-hov);
+#opt2 {
+  color: var(--navbar-icon);
+  text-align: center;
+  padding: 14px 22px;
+  text-decoration: none;
+  font-size: 17px;
+  background: var(--navbar-col);
+  border-radius: 25px;
+  margin-left: 10px;
+  border: var(--navbar-col);
+  cursor: pointer;
 }
 
+#opt3 {
+  color: var(--navbar-icon);
+  text-align: center;
+  padding: 14px 22px;
+  text-decoration: none;
+  font-size: 17px;
+  background: var(--navbar-col);
+  border-radius: 25px;
+  margin-left: 10px;
+  border: var(--navbar-col);
+  cursor: pointer;
+}
 
 /* Style the main content */
 .main {

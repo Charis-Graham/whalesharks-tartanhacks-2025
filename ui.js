@@ -77,6 +77,37 @@ slider.oninput = function() {
     sea.position.set(0, this.value/15, 0);
 }
 
-//DISPLAY BUTTONS
 
+// DISPLAY BUTTONS
+function iconSetOne() {
+    var opt1 = document.getElementById("opt1");
+    var opt2 = document.getElementById("opt2");
+    var opt3 = document.getElementById("opt3"); // Corrected this line
+
+    opt1.style.background = "var(--navbar-hov)";
+    opt2.style.background = "var(--navbar-col)";
+    opt3.style.background = "var(--navbar-col)";
+}
+
+function iconSetTwo() {
+    var opt1 = document.getElementById("opt1");
+    var opt2 = document.getElementById("opt2");
+    var opt3 = document.getElementById("opt3"); // Corrected this line
+
+    opt1.style.background = "var(--navbar-col)";
+    opt2.style.background = "var(--navbar-hov)";
+    opt3.style.background = "var(--navbar-col)";
+}
+
+function iconSetThree() {
+    var opt1 = document.getElementById("opt1");
+    var opt2 = document.getElementById("opt2");
+    var opt3 = document.getElementById("opt3"); // Corrected this line
+
+    opt1.style.background = "var(--navbar-col)";
+    opt2.style.background = "var(--navbar-col)"; // Corrected this line (should match others)
+    opt3.style.background = "var(--navbar-hov)";
+}
+
+        
 
