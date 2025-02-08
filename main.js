@@ -15,7 +15,7 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 
 document.body.appendChild(renderer.domElement);
 const effect = new OutlineEffect(renderer, {
-  defaultColor: [1.0, 1.0, 1.0],
+  defaultColor: [0,0,0],
 });
 
 // water shader
@@ -213,7 +213,7 @@ function addTreesToHexes() {
 
 
 sea = new THREE.Mesh(
-  new THREE.CylinderGeometry(30,30,.3,50),
+  new THREE.CylinderGeometry(20,20,.3,50),
   waterShader
   /*new THREE.MeshPhysicalMaterial({
     color: new THREE.Color('rgb(110, 226, 255)'),
