@@ -36,9 +36,15 @@ export class HexWorld {
     return snappedValue;
   }
 
+  resetHexGrid() {
+    for (const tile of this.tiles) {
+      tile.setHeight(0); 
+    }
+  }
+
   generateRandom() {
     const frequency = 0.1;
-    const amplitude = 5;
+    const amplitude = 4;
   
     for (const tile of this.tiles) {
       const noiseValue = this.noise2D(tileToPosition(tile.i, tile.j)[0] * frequency, tileToPosition(tile.i, tile.j)[1] * frequency);
