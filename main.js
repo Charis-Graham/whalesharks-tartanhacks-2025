@@ -77,7 +77,7 @@ document.addEventListener('click', onClick, false);
 function onClick(event) {
   const rect = renderer.domElement.getBoundingClientRect();
   
-  
+
   pointer.x = ((event.clientX - rect.left) / rect.width)  * 2 - 1;
   pointer.y = -((event.clientY - rect.top)  / rect.height) * 2 + 1;
     raycaster.setFromCamera(pointer, camera);
@@ -86,7 +86,7 @@ function onClick(event) {
         const intersectedObject = intersects[0].object;
 
         const tile = intersectedObject.userData.tile;
-        if (tile && tile.land) tile.setHeight(tile.getHeight+1);
+        if (tile && tile.land) tile.setHeight(((tile.getHeight+1) % 9) + 1);
     }
 }
 
@@ -105,10 +105,10 @@ const land = new THREE.MeshPhongMaterial({ color: 0x00ff00 , flatShading : true}
 const water = material; // new THREE.MeshPhongMaterial({ color: 0x0000ff , flatShading : true});
 
 
-// const hexWorld = new HexWorld(land, true);
-// hexWorld.generateHexGrid(8, 8, 1);
-// const tileMeshes = hexWorld.getTileMeshes();
-// tileMeshes.forEach(mesh => scene.add(mesh));
+const hexWorld = new HexWorld(land, true);
+hexWorld.generateHexGrid(8, 8, 0);
+const tileMeshes = hexWorld.getTileMeshes();
+tileMeshes.forEach(mesh => scene.add(mesh));
 
 const waterWorld = new HexWorld(water, false);
 waterWorld.generateHexGrid(8, 8, 1);
