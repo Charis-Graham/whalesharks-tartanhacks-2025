@@ -12,6 +12,10 @@ let waterTex = new THREE.TextureLoader().load('textures/clear-sea-water-2048x204
 waterTex.wrapS = THREE.RepeatWrapping;
 waterTex.wrapT = THREE.RepeatWrapping;
 
+let waveTex = new THREE.TextureLoader().load('textures/360_F_313465915_yKeoaVjyWw5X9zLYUtfi68qNtMM3VivJ.jpg');
+waveTex.wrapS = THREE.RepeatWrapping;
+waveTex.wrapT = THREE.RepeatWrapping;
+
 export class CustomMaterials{
     static waterSimple_fragmentShader = `
     uniform vec3 color;
@@ -77,13 +81,35 @@ export class CustomMaterials{
         // layout(location = 1) in vec2 uv;  // Built-in UV coordinates attribute
 
         out vec2 vUv;
+        uniform float time;
+        uniform sampler2D waveNoise;
+        float repeatFactor = 1.;
+        float waveAmplitude = 0.3;
+        float waveFrequency = 3.;
         void main() {
-            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);  // Standard position calculation
             vUv = uv;  // Pass the built-in 'uv' attribute to the fragment shader
+            // vUv = clamp(cos(uv), 0., 1.);
+            vec3 perlinSample = texture(waveNoise, mod(uv*repeatFactor, 1.0)).rgb;
+            float perlinLuminosity = dot(perlinSample, vec3(0.299, 0.587, 0.114));
+
+            vec4 pos = projectionMatrix * modelViewMatrix * vec4(position, 1.0);  // Standard position calculation
+            float r = length(pos); // 2D radius from center
+            float weight = clamp(30.-r, 0., 30.)/30.;   
+            weight = 1.;
+
+            vec4 wave_offset = vec4(0.,
+                                    // waveAmplitude*0.2*perlinLuminosity*cos(time*waveFrequency)*weight, 
+                                    waveAmplitude*perlinLuminosity*sin(time*waveFrequency)*weight, 
+                                    0., 
+                                    0.);
+            // wave_offset = vec4(0., 0., 0., 0.);
+
+            gl_Position = pos + wave_offset;
         }
         `;
     static perlin = perlinTexture;
     static water = waterTex;
+    static wave = waveTex;
 
     constructor(camera, renderer, fragmentShader) {
         this.pixelRatio = renderer.getPixelRatio();
@@ -96,8 +122,10 @@ export class CustomMaterials{
             near: {value: camera.near },
             far: {value: camera.far },
             waterNoise: {value: CustomMaterials.water},
-            perlinNoise: {value: CustomMaterials.perlin},
-            resolution: { value: new THREE.Vector2(window.innerWidth*this.pixelRatio, window.innerHeight*this.pixelRatio) }
+            waveNoise: {value: CustomMaterials.perlin},
+            // waveNoise: {value: CustomMaterials.wave},
+            resolution: { value: new THREE.Vector2(window.innerWidth*this.pixelRatio, window.innerHeight*this.pixelRatio) },
+            time: {value: 0. }
         };
         this.transparent = true;
         this.blending =  THREE.NormalBlending;

@@ -39,6 +39,8 @@ const transparentWaterShader = new THREE.ShaderMaterial({
     `
 });
 
+
+
 // ! start new code from Clytie
 let materialMaker = new CustomMaterials(camera, renderer, CustomMaterials.water_fragmentShader);
 // & stuff I used for testing perlin texture
@@ -226,7 +228,8 @@ sea = new THREE.Mesh(
 )
 
 sea.position.set(0, 0, 0);
-scene.add(sea);
+const scene1 = new THREE.Scene();;
+scene1.add(sea);
 
 
 renderer.setAnimationLoop(animate);
@@ -236,6 +239,7 @@ let intersect = null;
 let i = 0;
 
 function animate() {
+  waterShader.uniforms.time.value = performance.now() / 1000;
   controls.update();
   i += 1;
 
@@ -274,6 +278,9 @@ function animate() {
   } else {
     renderer.render(scene, camera);
   }
+  renderer.autoClear = false;
+  renderer.render(scene1, camera); // render water without postprocessing either way
+  renderer.autoClear = true;  
 
 }
 
