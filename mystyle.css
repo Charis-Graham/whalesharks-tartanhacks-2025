@@ -19,8 +19,8 @@ html {
   --icon-col: gray;
   --icon-hov: white;
   --tooltip-bg: gray;
-  --navbar-col: lightgreen;
-  --navbar-icon: black;
+  --navbar-col: rgb(227, 227, 227);
+  --navbar-icon: gray;
   --navbar-hov: white;
 }
 
