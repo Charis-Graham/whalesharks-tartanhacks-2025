@@ -1,7 +1,9 @@
 import * as THREE from 'three';
 
 export class Hex {
-  constructor({ position, material, height = 3 , land = true}) {
+  constructor({ i, j, position, material, height = 3 , land = true}) {
+    this.i = i;
+    this.j = j;
     this.position2D = position.clone();
     this.material = material;
     this.height = height;

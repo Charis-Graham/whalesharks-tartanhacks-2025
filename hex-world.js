@@ -45,11 +45,13 @@ export class HexWorld {
   generateRandom() {
     const frequency = 0.1;
     const amplitude = 4;
+    const off = Math.random;
   
     for (const tile of this.tiles) {
-      const noiseValue = this.noise2D(tileToPosition(tile.i, tile.j)[0] * frequency, tileToPosition(tile.i, tile.j)[1] * frequency);
+      const pos = this.tileToPosition(tile.i + off, tile.j + off);
+      const noiseValue = this.noise2D(pos.x * frequency, pos.y * frequency);
       const newHeight = noiseValue * amplitude;
-      tile.setHeight(this.snapToInterval(newHeight)); 
+      tile.setHeight(this.snapToInterval(newHeight + 5)); 
     }
   }
 
@@ -69,6 +71,8 @@ export class HexWorld {
         }
 
         const tile = new Hex({
+          i,
+          j,
           position,
           material: tileMaterial,
           height

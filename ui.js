@@ -43,9 +43,9 @@ function clickBtn(x){
 // Code to control switching modes of ui system
 function setMode(mode) {
     if (mode == 'drag'){
-        modeIsClick = false;
-    } else if (mode == 'click') {
         modeIsClick = true;
+    } else if (mode == 'click') {
+        modeIsClick = false;
     } else if (mode == 'border') {
         drawBorder = true;
     } else if (mode == 'noBorder'){
