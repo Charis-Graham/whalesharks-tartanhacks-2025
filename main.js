@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { MapControls } from 'three/addons/controls/MapControls.js';
 import { HexWorld } from './hex-world.js';
 import { OutlineEffect } from 'three/addons/effects/OutlineEffect.js';
+import { CustomMaterials } from './materials.js';
 
 
 const scene = new THREE.Scene();
@@ -59,6 +60,7 @@ const waterShader = new THREE.ShaderMaterial({
 // const dirtTexture = new THREE.TextureLoader().load( "textures/dirt_ground_texture__tileable___2048x2048__by_fabooguy_d7aopi7-414w-2x.jpg" );
 // const dirtTexture = new THREE.TextureLoader().load( "textures/saturated_dirt.JPG" );
 const dirtTexture = new THREE.TextureLoader().load( "textures/unsaturated dirt.JPG" );
+// credit for original texture: https://www.deviantart.com/fabooguy/art/Dirt-Ground-Texture-Tileable-2048x2048-441212191
 dirtTexture.encoding = THREE.sRGBEncoding;
 
 // dirtTexture.wrapS = THREE.RepeatWrapping;
