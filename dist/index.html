@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+		<title>HexWorld</title>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined">
+	<script type="module" crossorigin src="/assets/index-DLyVQB1N.js"></script>
+	<link rel="stylesheet" crossorigin href="/assets/index-DvVi0QzL.css">
+
+	<body>
+
+		<!-- Top nav bar -->
+		<div class="topnav">
+			<button href="javascript:void(0)">
+				<span class="material-symbols-outlined" onclick="clickBtn(2)" style="font-size:50px;">refresh</span>
+			</button>
+
+			<button href="javascript:void(0)">
+				<span class="material-symbols-outlined" onclick="clickBtn(1)" style="font-size:50px; transform:rotate(25deg);">ifl</span>
+			</button>
+		</div>
+		
+		<!-- The sidebar -->
+		<div id = "sidebar" class="sidebar">
+			<a href="javascript:void(0)" class="closebtn" onclick="closeMode()" style="font-size:30px;" >&times;</a>
+
+			<!-- Landscaping -->
+			<div class = "tooltip">
+				<a href="javascript:void(0)" id = "active1" onclick="setMode('landscape')">
+					<span class="material-symbols-outlined" style="font-size:50px;">landscape</span>
+				</a>
+				<span class="tooltiptext">Landscape</span>
+			</div>
+			
+			<!-- Painting -->
+			<div class = "tooltip">
+				<a href="javascript:void(0)" id = "active2" onclick="setMode('painting')">
+					<span class="material-symbols-outlined" style="font-size:50px;">palette</span>
+				</a>
+				<span class="tooltiptext">Paint</span>
+			</div>
+			
+			<!-- Object Addition -->
+			<div class = "tooltip">
+				<a href="javascript:void(0)" id = "active3" onclick="setMode('decorate')">
+					<span class="material-symbols-outlined" style="font-size:50px;">forest</span>
+				</a>
+				<span class="tooltiptext">Decorate</span>
+			</div>
+
+			<span id = "split" class="material-symbols-outlined" style="font-size:50px;"><b>⎯⎯</bb></span>
+			
+			<!-- Speed of input -->
+			<div class = "tooltip">
+				<a href="javascript:void(0)">
+					<span id="toggle1" class="material-symbols-outlined" onclick="toggleBtn(1)" style="font-size:50px;">drag_pan</span>
+				</a>
+				<span class="tooltiptext">Draw Mode</span>
+			</div>
+			
+			<!-- Outlined or not -->
+			<div class = "tooltip">
+				<a href="javascript:void(0)">
+					<span id="toggle2" class="material-symbols-outlined" onclick="toggleBtn(2)" style="font-size:50px;">border_outer</span>
+				</a>
+				<span class="tooltiptext">Outline</span>
+			</div>
+			
+		</div>
+
+		<!-- Side open button for sidebar -->
+		<button class="openbtn" onclick="openMode()">
+			<span class="material-symbols-outlined" style="font-size:50px;">
+				expand_circle_right
+			</span>
+		</button>
+
+		<!-- SLIDER -->
+		<div class="slidecontainer">
+			<input type="range" min="1" max="100" value="5" class="slider" id="slider">
+			<p id = "demo"></p>
+		</div>
+
+		<!-- DISPLAY BUTTONS -->
+		<div class="display-buttons">
+			<button id="opt1" onclick="iconSetOne()">
+				<span class="material-symbols-outlined" style="font-size:50px;">dialogs</span>
+			</button>
+						
+			<button id="opt2" onclick="iconSetTwo()">
+				<span class="material-symbols-outlined" style="font-size:50px;">dialogs</span>
+			</button>
+
+			<button id="opt3" onclick="iconSetThree()">
+				<span class="material-symbols-outlined" style="font-size:50px;">dialogs</span>
+			</button>
+		</div>
+
+		
+		<!-- Javascript for UI elements -->
+		<script src="./ui.js"></script>
+		
+	</body>
+</html>
+

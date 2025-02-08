@@ -1,0 +1,15 @@
+{
+  "name": "whalesharks-tartanhacks-2025",
+  "version": "1.0.0",
+  "description": "<h1>HexWorld: A Procedural Hex World Island Generator</h1> HexWorld is an innovative web application developed for the 2025 TartanHacks Hackathon, designed to generate procedurally crafted hexagonal world maps. Whether you're a game developer, digital artist, or storyteller, HexWorld provides a seamless tool for creating immersive landscapes for map-based storytelling, game design, and animation content generation.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "three": "^0.173.0"
+  }
+}
