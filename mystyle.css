@@ -12,16 +12,19 @@ html {
 
 
 :root {
+
+
   --bright: #e6a19e;
   --dark: #5a548a;
   --overall-background: white;
   --sidebar-col: rgb(227, 227, 227);
-  --icon-col: gray;
-  --icon-hov: white;
+  --icon-col: #a88095;;
+  --icon-hov: #745465;
   --tooltip-bg: gray;
-  --navbar-col: rgb(227, 227, 227);
-  --navbar-icon: gray;
+  --navbar-col: rgb(255, 255, 255);
+  --navbar-icon: black;
   --navbar-hov: white;
+  
 }
 
 
