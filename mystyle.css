@@ -191,7 +191,7 @@ body {
   appearance: none;
   width: 25px; /* Set a specific slider handle width */
   height: 25px; /* Slider handle height */
-  background: var(--icon-col); /* gray background */
+  background: var(--icon-hov); /* gray background */
   cursor: pointer; /* Cursor on hover */
   border-radius: 20px;
 }
@@ -199,7 +199,7 @@ body {
 .slider::-moz-range-thumb {
   width: 25px; /* Set a specific slider handle width */
   height: 25px; /* Slider handle height */
-  background: var(--icon-col); /* gray background */
+  background: var(--icon-hov); /* gray background */
   cursor: pointer; /* Cursor on hover */
   border-radius: 20px;
 }

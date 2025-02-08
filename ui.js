@@ -1,5 +1,3 @@
-
-
 // SIDE BAR CODE
 function openMode() {
     document.getElementById("sidebar").style.width = "9%";
