@@ -9,40 +9,63 @@
 	<body>
 		<script type="module" src="/main.js"></script>
 
-		<!-- <button class="btn btn-outline-secondary" @click="open('linkedin')">
-            LinkedIn
-            <i class="fab fa-linkedin"></i>
-        </button> -->
-
 		<!-- The sidebar -->
 		<div id = "sidebar" class="sidebar">
 			<a href="javascript:void(0)" class="closebtn" onclick="closeMode()" style="font-size:30px;" >&times;</a>
-			<a href="javascript:void(0)">
-				<span class="material-symbols-outlined" style="font-size:50px;">landscape</span>
-			</a>
-			<a href="javascript:void(0)">
-				<span class="material-symbols-outlined" style="font-size:50px;">palette</span>
-			</a>
-			<a href="javascript:void(0)">
-				<span class="material-symbols-outlined" style="font-size:50px;">forest</span>
-			</a>
-			<a href="javascript:void(0)">
-				<span id="toggle1" class="material-symbols-outlined" onclick="toggleBtn(1)" style="font-size:50px;">arrow_selector_tool</span>
-			</a>
-			<a href="javascript:void(0)">
-				<span id="toggle2" class="material-symbols-outlined" onclick="toggleBtn(2)" style="font-size:50px;">border_clear</span>
-			</a>
+
+			<!-- Landscaping -->
+			<div class = "tooltip">
+				<a href="javascript:void(0)">
+					<span class="material-symbols-outlined" style="font-size:50px;">landscape</span>
+				</a>
+				<span class="tooltiptext">Landscape</span>
+			</div>
+			
+			<!-- Painting -->
+			<div class = "tooltip">
+				<a href="javascript:void(0)">
+					<span class="material-symbols-outlined" style="font-size:50px;">palette</span>
+				</a>
+				<span class="tooltiptext">Paint</span>
+			</div>
+			
+			<!-- Object Addition -->
+			<div class = "tooltip">
+				<a href="javascript:void(0)">
+					<span class="material-symbols-outlined" style="font-size:50px;">forest</span>
+				</a>
+				<span class="tooltiptext">Decorate</span>
+			</div>
+			
+			<!-- Speed of input -->
+			<div class = "tooltip">
+				<a href="javascript:void(0)">
+					<span id="toggle1" class="material-symbols-outlined" onclick="toggleBtn(1)" style="font-size:50px;">arrow_selector_tool</span>
+				</a>
+				<span class="tooltiptext">Draw Mode</span>
+			</div>
+			
+			<!-- Outlined or not -->
+			<div class = "tooltip">
+				<a href="javascript:void(0)">
+					<span id="toggle2" class="material-symbols-outlined" onclick="toggleBtn(2)" style="font-size:50px;">border_clear</span>
+				</a>
+				<span class="tooltiptext">Outline</span>
+			</div>
+			
 		</div>
 
+		<!-- Side open button for sidebar -->
 		<button class="openbtn" onclick="openMode()">
 			<span class="material-symbols-outlined" style="font-size:50px;">
 				expand_circle_right
 			</span>
 		</button>
 
+		<!-- Javascript for side bar -->
 		<script>
 			function openMode() {
-			 	document.getElementById("sidebar").style.width = "7%";
+			 	document.getElementById("sidebar").style.width = "9%";
 			}
 			
 			function closeMode() {
@@ -63,7 +86,6 @@
 						document.getElementById("toggle2").innerHTML = "border_clear";
 					}
 				}
-				
 				
 			}
 		</script>

@@ -1,19 +1,28 @@
 
+:root {
+  --overall-background: white;
+  --sidebar-col: lightgreen;
+  --icon-col: gray;
+  --icon-hov: white;
+  --tooltip-bg: gray;
+}
+
+
 body {
-  background: black;
+  background: var(--overall-background);
   padding: 0px;
 }
 
 /* Style the sidebar - fixed full height */
 .sidebar {
-  height: 65%;
-  width: 7%;
+  height: 50%;
+  width: 9%;
   border-radius: 25px;
   position: fixed;
   z-index: 1;
   top: 15%;
   left: 0;
-  background-color: white;
+  background-color: var(--sidebar-col);
   overflow-x: hidden;
   padding-top: 50px;
   transition: 0.3s;
@@ -21,23 +30,23 @@ body {
 
 /* Style sidebar links */
 .sidebar a {
-  padding: 6px 8px 6px 25px;
+  padding:15px 8px 6px 40px;
   text-decoration: none;
   font-size: 20px;
-  color: #818181;
+  color: var(--icon-col);
   display: block;
 }
 
 /* Style links on mouse-over */
 .sidebar a:hover {
-  color: #f1f1f1;
+  color: var(--icon-hov);
 }
 
 /* Position and style the close button */
 .sidebar .closebtn {
   position: absolute;
-  top: 10px;
-  left: -10px;
+  top: 3px;
+  left: 3px;
   font-size: 24px;
   margin-left: 50px;
 }
@@ -45,7 +54,7 @@ body {
 /* Open side panel button */
 .openbtn {
   position: fixed;
-  top: 45%;
+  top: 40%;
   left: -9px;
   cursor: pointer;
   padding: 10px 15px;
@@ -53,6 +62,7 @@ body {
   border: none;
 }
 
+/* Icons for the sidebar */
 .material-symbols-outlined {
   font-variation-settings:
   'FILL' 0,
@@ -61,10 +71,45 @@ body {
   'opsz' 24
 }
 
+/* Tooltip styling */
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: var(--tooltip-bg);
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 75%;
+  left: 70%;
+  margin-left: -60px;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: var(--tooltip-bg) transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
 /* Style the main content */
 .main {
-  margin-left: 160px; /* Same as the width of the sidenav */
-  padding: 0px 10px;
+  margin: 0px;
 }
 
 /* Add media queries for small screens (when the height of the screen is less than 450px, add a smaller padding and font-size) */
