@@ -17,7 +17,7 @@ const effect = new OutlineEffect(renderer, {
 
 
 // const material = new THREE.MeshBasicMaterial( { color: 0x6ee2ff } );
-let pixelRatio = renderer.getPixelRatio();
+// let pixelRatio = renderer.getPixelRatio();
 const material = new THREE.ShaderMaterial({
     uniforms: {
         color: { value: new THREE.Color('rgb(110, 226, 255)') },
@@ -35,7 +35,7 @@ const material = new THREE.ShaderMaterial({
     // opacity: 0.5,
     fragmentShader: `
     uniform vec3 color;
-    uniform float alpha, near, far;
+    uniform float alpha; //, near, far;
     // uniform vec2 resolution;
     void main() {
 
@@ -98,13 +98,13 @@ scene.add(dirLight);
 
 
 const land = new THREE.MeshPhongMaterial({ color: 0x00ff00 , flatShading : true});
-const water = new THREE.MeshPhongMaterial({ color: 0x0000ff , flatShading : true});
+const water = material; // new THREE.MeshPhongMaterial({ color: 0x0000ff , flatShading : true});
 
 
-const hexWorld = new HexWorld(land, true);
-hexWorld.generateHexGrid(8, 8, 1);
-const tileMeshes = hexWorld.getTileMeshes();
-tileMeshes.forEach(mesh => scene.add(mesh));
+// const hexWorld = new HexWorld(land, true);
+// hexWorld.generateHexGrid(8, 8, 1);
+// const tileMeshes = hexWorld.getTileMeshes();
+// tileMeshes.forEach(mesh => scene.add(mesh));
 
 const waterWorld = new HexWorld(water, false);
 waterWorld.generateHexGrid(8, 8, 1);
@@ -113,11 +113,13 @@ waterMeshes.forEach(mesh => scene.add(mesh));
 
 
 
+
+
 renderer.setAnimationLoop(animate);
 
 // add light
-const light = new THREE.AmbientLight(); // soft white light
-scene.add( light );
+// const light = new THREE.AmbientLight(); // soft white light
+// scene.add( light );
 
 // add cube to test depth
 // const geometry = new THREE.BoxGeometry( 1, 1, 1 );
