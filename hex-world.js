@@ -38,7 +38,13 @@ export class HexWorld {
 
   resetHexGrid() {
     for (const tile of this.tiles) {
-      tile.setHeight(0); 
+      
+      /*tile.tree.visible = false;
+      tile.mesh.material = newMaterial;
+      tile.mesh.material.needsUpdate = true;*/
+      tile.setHeight(0);
+      tile.tree.visible = false;
+      tile.setMaterial(this.defaultMaterial);
     }
   }
 
