@@ -21,24 +21,6 @@ const effect = new OutlineEffect(renderer, {
 // water shader
 // const material = new THREE.MeshBasicMaterial( { color: 0x6ee2ff } );
 let pixelRatio = renderer.getPixelRatio();
-<<<<<<< Updated upstream
-const waterShader = new THREE.ShaderMaterial({
-  uniforms: {
-    color: { value: new THREE.Color('rgb(110, 226, 255)') },
-    alpha: { value: 0.5 },
-    near: { value: camera.near },
-    far: { value: camera.far },
-    // resolution: { value: new THREE.Vector2(window.innerWidth*pixelRatio, window.innerHeight*pixelRatio) }
-  },
-  // attributes: {
-
-  // },
-  // color: 0x6ee2ff, 
-  transparent: true,
-  blending: THREE.NormalBlending,
-  // opacity: 0.5,
-  fragmentShader: `
-=======
 let waterColor = new THREE.Color('rgb(110, 226, 255)');
 const transparentWaterShader = new THREE.ShaderMaterial({
     uniforms: {
@@ -48,7 +30,6 @@ const transparentWaterShader = new THREE.ShaderMaterial({
     transparent: true, 
     blending: THREE.NormalBlending,
     fragmentShader: `
->>>>>>> Stashed changes
     uniform vec3 color;
     uniform float alpha;
     void main() {
@@ -232,11 +213,7 @@ function addTreesToHexes() {
 
 
 sea = new THREE.Mesh(
-<<<<<<< Updated upstream
-  new THREE.CylinderGeometry(100, 100, .1, 50),
-=======
   new THREE.CylinderGeometry(30,30,.3,50),
->>>>>>> Stashed changes
   waterShader
   /*new THREE.MeshPhysicalMaterial({
     color: new THREE.Color('rgb(110, 226, 255)'),
