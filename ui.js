@@ -42,8 +42,9 @@ function clickBtn(x){
 // Code to control switching modes of ui system
 function setMode(mode) {
     var landscape = document.getElementById("active1");
-    var painting = document.getElementById("active2");
-    var decorate = document.getElementById("active3");
+    var painting  = document.getElementById("active2");
+    var decorate  = document.getElementById("active3");
+
     if (mode == 'drag'){
         modeIsClick = false;
     } else if (mode == 'click') {
@@ -54,18 +55,43 @@ function setMode(mode) {
         drawBorder = false;
     } else if (mode == "landscape") {
         landscape.style.color = "var(--navbar-hov)";
-        painting.style.color = "var(--navbar-icon)";
-        decorate.style.color = "var(--navbar-icon)";
+        painting.style.color  = "var(--navbar-icon)";
+        decorate.style.color  = "var(--navbar-icon)";
     } else if (mode == "painting") {
         landscape.style.color = "var(--navbar-icon)";
-        painting.style.color = "var(--navbar-hov)";
-        decorate.style.color = "var(--navbar-icon)";
+        painting.style.color  = "var(--navbar-hov)";
+        decorate.style.color  = "var(--navbar-icon)";
     } else if (mode == "decorate") {
         landscape.style.color = "var(--navbar-icon)";
-        painting.style.color = "var(--navbar-icon)";
-        decorate.style.color = "var(--navbar-hov)";
+        painting.style.color  = "var(--navbar-icon)";
+        decorate.style.color  = "var(--navbar-hov)";
+    }
+
+    // Instead of display, toggle visibility so that the layout stays the same.
+    var opt1 = document.getElementById("opt1");
+    var opt2 = document.getElementById("opt2");
+    var opt3 = document.getElementById("opt3");
+
+    if (mode === "decorate") {
+        opt1.style.visibility = "visible";
+        opt2.style.visibility = "visible";
+        opt3.style.visibility = "visible";
+        // Optional: allow interactions when visible.
+        opt1.style.pointerEvents = "auto";
+        opt2.style.pointerEvents = "auto";
+        opt3.style.pointerEvents = "auto";
+    } else {
+        opt1.style.visibility = "hidden";
+        opt2.style.visibility = "hidden";
+        opt3.style.visibility = "hidden";
+        // Prevent interactions when hidden.
+        opt1.style.pointerEvents = "none";
+        opt2.style.pointerEvents = "none";
+        opt3.style.pointerEvents = "none";
     }
 }
+
+
 
 //SLIDER CODE
 var slider = document.getElementById("slider");
@@ -83,7 +109,7 @@ slider.oninput = function() {
 function iconSetOne() {
     var opt1 = document.getElementById("opt1");
     var opt2 = document.getElementById("opt2");
-    var opt3 = document.getElementById("opt3"); // Corrected this line
+    var opt3 = document.getElementById("opt3"); 
 
     opt1.style.background = "var(--navbar-hov)";
     opt2.style.background = "var(--navbar-col)";
@@ -93,7 +119,7 @@ function iconSetOne() {
 function iconSetTwo() {
     var opt1 = document.getElementById("opt1");
     var opt2 = document.getElementById("opt2");
-    var opt3 = document.getElementById("opt3"); // Corrected this line
+    var opt3 = document.getElementById("opt3"); 
 
     opt1.style.background = "var(--navbar-col)";
     opt2.style.background = "var(--navbar-hov)";
@@ -103,10 +129,10 @@ function iconSetTwo() {
 function iconSetThree() {
     var opt1 = document.getElementById("opt1");
     var opt2 = document.getElementById("opt2");
-    var opt3 = document.getElementById("opt3"); // Corrected this line
+    var opt3 = document.getElementById("opt3");
 
     opt1.style.background = "var(--navbar-col)";
-    opt2.style.background = "var(--navbar-col)"; // Corrected this line (should match others)
+    opt2.style.background = "var(--navbar-col)";
     opt3.style.background = "var(--navbar-hov)";
 }
 

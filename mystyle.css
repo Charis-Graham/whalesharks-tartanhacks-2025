@@ -224,7 +224,7 @@ body {
 }
 
 #opt1 {
-  color: var(--navbar-icon);
+  color: #c3c3c3;
   text-align: center;
   padding: 14px 22px;
   text-decoration: none;
@@ -237,7 +237,7 @@ body {
 }
 
 #opt2 {
-  color: var(--navbar-icon);
+  color: #85b799;
   text-align: center;
   padding: 14px 22px;
   text-decoration: none;
@@ -250,7 +250,7 @@ body {
 }
 
 #opt3 {
-  color: var(--navbar-icon);
+  color: #976a6a;
   text-align: center;
   padding: 14px 22px;
   text-decoration: none;
