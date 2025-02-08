@@ -1,4 +1,5 @@
-import * as THREE from 'three';
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@latest/build/three.module.js';
+
 import { createNoise2D } from 'https://cdn.skypack.dev/simplex-noise';
 import { Hex } from './hex.js';
 

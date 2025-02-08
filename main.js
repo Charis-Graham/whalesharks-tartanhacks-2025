@@ -1,4 +1,5 @@
-import * as THREE from 'three';
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@latest/build/three.module.js';
+
 import { MapControls } from 'three/addons/controls/MapControls.js';
 import { HexWorld } from './hex-world.js';
 import { OutlineEffect } from 'three/addons/effects/OutlineEffect.js';
