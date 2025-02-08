@@ -18,12 +18,12 @@ html {
   --dark: #5a548a;
   --overall-background: white;
   --sidebar-col: rgb(227, 227, 227);
-  --icon-col: #a88095;;
+  --icon-col: #a88095;
   --icon-hov: #745465;
   --tooltip-bg: gray;
-  --navbar-col: rgb(255, 255, 255);
-  --navbar-icon: black;
-  --navbar-hov: white;
+  --navbar-col: rgb(227, 227, 227);
+  --navbar-icon: #a88095;
+  --navbar-hov: #745465;
   
 }
 
@@ -204,18 +204,37 @@ body {
   border-radius: 20px;
 }
 
+#demo {
+  visibility:hidden;
+}
+
 
 /* Content Container */
-.display-cnt {
+
+.display-buttons {
+  overflow: hidden;
+  margin-top: 35%;
+  margin-left: 75%;
   position:absolute;
-  margin-top:18%;
-  margin-left:76%;
-  padding:150px;
-  background-color: var(--navbar-col);
-  overflow-x: hidden;
-  border:none;
-  border-radius: 20px;
+  
 }
+
+.display-buttons button {
+  color: var(--navbar-icon);
+  text-align: center;
+  padding: 14px 22px;
+  text-decoration: none;
+  font-size: 17px;
+  background-color: var(--navbar-col);
+  border-radius: 25px;
+  margin-left: 10px;
+  border: var(--navbar-col);
+}
+
+.display-buttons button:hover {
+  color: var(--navbar-hov);
+}
+
 
 /* Style the main content */
 .main {
