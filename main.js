@@ -113,7 +113,14 @@ function onClick(event) {
       const intersectedObject = intersects[i].object;
       const tile = intersectedObject.userData.tile;
       if (tile && tile.land) {
-        tile.setHeight(((tile.getHeight + .5) % 9) + 1);
+
+        if (modeSelection == 'painting'){
+          tile.setMaterial(dirtMaterial);
+        } else if (modeSelection == 'decorate'){
+          tile.setTreeVisible();
+        } else if (modeSelection == 'landscape'){
+          tile.setHeight(((tile.getHeight + .5) % 9) + 1);
+        }
         break;
       }
     }
@@ -229,16 +236,25 @@ function animate() {
   controls.update();
   i += 1;
 
-  if (modeIsClick && i % 20 == 0){
+  if (!(modeIsClick) && i % 8 == 0){
     raycaster.setFromCamera(pointer, camera);
     raycaster.layers.set(0);
+
+    console.log(modeSelection);
 
     const intersects = raycaster.intersectObjects(scene.children, false);
     for (let i = 0; i < intersects.length; i++) {
       const intersectedObject = intersects[i].object;
       const tile = intersectedObject.userData.tile;
       if (tile && tile.land) {
-        tile.setHeight(((tile.getHeight + .5) % 9) + 1);
+
+        if (modeSelection == 'painting'){
+          tile.setMaterial(dirtMaterial);
+        } else if (modeSelection == 'decorate'){
+          tile.setTreeVisible();
+        } else if (modeSelection == 'landscape'){
+          tile.setHeight(((tile.getHeight + .5) % 9) + 1);
+        }
         break;
       }
     }

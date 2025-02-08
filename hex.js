@@ -47,10 +47,20 @@ export class Hex {
         this.height,
         this.position2D.y
       );
-      this.tree.visible = false;
     }
 
     this.mesh.geometry = this.geometry;
+  }
+
+  setMaterial(newMaterial){
+    this.material = newMaterial;
+    this.mesh.material = newMaterial;
+    this.mesh.material.needsUpdate = true;
+  }
+
+  setTreeVisible(){
+    this.tree.visible = !this.tree.visible;
+    
   }
   
 }
