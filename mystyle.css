@@ -59,7 +59,7 @@ body {
 /* SIDEBAR */
 /* Style the sidebar - fixed full height */
 .sidebar {
-  height: 50%;
+  height: 60%;
   width: 9%;
   border-radius: 25px;
   position: fixed;
@@ -93,6 +93,11 @@ body {
   left: 3px;
   font-size: 24px;
   margin-left: 50px;
+}
+
+#split {
+  color: var(--icon-col);
+  padding:0px 0px 20px 40px;
 }
 
 /* Open side panel button */
@@ -230,6 +235,7 @@ body {
   margin-left: 10px;
   border: var(--navbar-col);
 }
+
 
 .display-buttons button:hover {
   color: var(--navbar-hov);

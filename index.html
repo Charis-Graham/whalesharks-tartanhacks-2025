@@ -30,7 +30,7 @@
 
 			<!-- Landscaping -->
 			<div class = "tooltip">
-				<a href="javascript:void(0)" onclick="setMode('landscape')">
+				<a href="javascript:void(0)" id = "active1" onclick="setMode('landscape')">
 					<span class="material-symbols-outlined" style="font-size:50px;">landscape</span>
 				</a>
 				<span class="tooltiptext">Landscape</span>
@@ -38,7 +38,7 @@
 			
 			<!-- Painting -->
 			<div class = "tooltip">
-				<a href="javascript:void(0)" onclick="setMode('painting')">
+				<a href="javascript:void(0)" id = "active2" onclick="setMode('painting')">
 					<span class="material-symbols-outlined" style="font-size:50px;">palette</span>
 				</a>
 				<span class="tooltiptext">Paint</span>
@@ -46,11 +46,13 @@
 			
 			<!-- Object Addition -->
 			<div class = "tooltip">
-				<a href="javascript:void(0)" onclick="setMode('decorate')">
+				<a href="javascript:void(0)" id = "active3" onclick="setMode('decorate')">
 					<span class="material-symbols-outlined" style="font-size:50px;">forest</span>
 				</a>
 				<span class="tooltiptext">Decorate</span>
 			</div>
+
+			<span id = "split" class="material-symbols-outlined" style="font-size:50px;">minimize</span>
 			
 			<!-- Speed of input -->
 			<div class = "tooltip">
@@ -83,18 +85,18 @@
 			<p id = "demo"></p>
 		</div>
 
-		<!-- DISPLAY BOX -->
+		<!-- DISPLAY BUTTONS -->
 		<div class="display-buttons">
 			<button href="javascript:void(0)">
-				<span id="opt1" class="material-symbols-outlined" onclick="clickBtn(2)" style="font-size:50px;">dialogs</span>
+				<span id="opt1" class="material-symbols-outlined" onclick="iconSet()" style="font-size:50px;">dialogs</span>
 			</button>
 						
 			<button href="javascript:void(0)">
-				<span id="opt2" class="material-symbols-outlined" style="font-size:50px;">dialogs</span>
+				<span id="opt2" class="material-symbols-outlined" onclick="iconSet()" style="font-size:50px;">dialogs</span>
 			</button>
 
 			<button href="javascript:void(0)">
-				<span id="opt3" class="material-symbols-outlined" onclick="clickBtn(1)" style="font-size:50px;">dialogs</span>
+				<span id="opt3" class="material-symbols-outlined" onclick="iconSet()" style="font-size:50px;">dialogs</span>
 			</button>
 		</div>
 

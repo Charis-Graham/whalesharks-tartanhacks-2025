@@ -40,6 +40,9 @@ function clickBtn(x){
 
 // Code to control switching modes of ui system
 function setMode(mode) {
+    var landscape = document.getElementById("active1");
+    var painting = document.getElementById("active2");
+    var decorate = document.getElementById("active3");
     if (mode == 'drag'){
         modeIsClick = true;
     } else if (mode == 'click') {
@@ -48,6 +51,18 @@ function setMode(mode) {
         drawBorder = true;
     } else if (mode == 'noBorder'){
         drawBorder = false;
+    } else if (mode == "landscape") {
+        landscape.style.color = "var(--navbar-hov)";
+        painting.style.color = "var(--navbar-icon)";
+        decorate.style.color = "var(--navbar-icon)";
+    } else if (mode == "painting") {
+        landscape.style.color = "var(--navbar-icon)";
+        painting.style.color = "var(--navbar-hov)";
+        decorate.style.color = "var(--navbar-icon)";
+    } else if (mode == "decorate") {
+        landscape.style.color = "var(--navbar-icon)";
+        painting.style.color = "var(--navbar-icon)";
+        decorate.style.color = "var(--navbar-hov)";
     }
 }
 
@@ -61,4 +76,7 @@ slider.oninput = function() {
 	output.innerHTML = this.value;
     sea.position.set(0, this.value/15, 0);
 }
+
+//DISPLAY BUTTONS
+
 
