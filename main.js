@@ -15,10 +15,10 @@ const effect = new OutlineEffect(renderer, {
     defaultColor: [1.0, 1.0, 1.0],
   });
 
-
+// water shader
 // const material = new THREE.MeshBasicMaterial( { color: 0x6ee2ff } );
 let pixelRatio = renderer.getPixelRatio();
-const material = new THREE.ShaderMaterial({
+const waterShader = new THREE.ShaderMaterial({
     uniforms: {
         color: { value: new THREE.Color('rgb(110, 226, 255)') },
         alpha: { value: 0.5 },
@@ -54,7 +54,20 @@ const material = new THREE.ShaderMaterial({
     `
 });
 
-console.log(material.uniforms.color.value); 
+// dirt texture material
+// const dirtTexture = new THREE.TextureLoader().load( "textures/dirt_ground_texture__tileable___2048x2048__by_fabooguy_d7aopi7-414w-2x.jpg" );
+// const dirtTexture = new THREE.TextureLoader().load( "textures/saturated_dirt.JPG" );
+const dirtTexture = new THREE.TextureLoader().load( "textures/unsaturated dirt.JPG" );
+dirtTexture.encoding = THREE.sRGBEncoding;
+
+// dirtTexture.wrapS = THREE.RepeatWrapping;
+// dirtTexture.wrapT = THREE.RepeatWrapping;
+// dirtTexture.repeat.set( 4, 4 );
+
+const dirtMaterial = new THREE.MeshBasicMaterial();// MeshStandardMaterial();
+dirtMaterial.map = dirtTexture;
+
+// console.log(waterShader.uniforms.color.value); 
 
 const controls = new MapControls( camera, renderer.domElement );
 controls.enableDamping = true;
@@ -90,26 +103,26 @@ function onClick(event) {
 camera.position.set(0, 40, 40);
 camera.lookAt(0, 0, 0);
 
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+const ambientLight = new THREE.AmbientLight(0x404040, 0.5);
 scene.add(ambientLight);
-const dirLight = new THREE.DirectionalLight(0xffffff, 0.5);
+const dirLight = new THREE.DirectionalLight(0x404040, 0.5);
 dirLight.position.set(100, 100, 100);
 scene.add(dirLight);
 
 
-const land = new THREE.MeshPhongMaterial({ color: 0x00ff00 , flatShading : true});
-const water = material; // new THREE.MeshPhongMaterial({ color: 0x0000ff , flatShading : true});
+const land = dirtMaterial; // new THREE.MeshPhongMaterial({ color: 0x00ff00 , flatShading : true});
+const water = waterShader; // new THREE.MeshPhongMaterial({ color: 0x0000ff , flatShading : true});
 
 
-// const hexWorld = new HexWorld(land, true);
-// hexWorld.generateHexGrid(8, 8, 1);
-// const tileMeshes = hexWorld.getTileMeshes();
-// tileMeshes.forEach(mesh => scene.add(mesh));
+const hexWorld = new HexWorld(land, true);
+hexWorld.generateHexGrid(8, 8, 1);
+const tileMeshes = hexWorld.getTileMeshes();
+tileMeshes.forEach(mesh => scene.add(mesh));
 
-const waterWorld = new HexWorld(water, false);
-waterWorld.generateHexGrid(8, 8, 1);
-const waterMeshes = waterWorld.getTileMeshes();
-waterMeshes.forEach(mesh => scene.add(mesh));
+// const waterWorld = new HexWorld(water, false);
+// waterWorld.generateHexGrid(8, 8, 1);
+// const waterMeshes = waterWorld.getTileMeshes();
+// waterMeshes.forEach(mesh => scene.add(mesh));
 
 
 
