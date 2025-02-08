@@ -1,7 +1,21 @@
+html {
+  width: 100%;
+  height: 100%;
+  
+  background: #11e8bb; /* Old browsers */
+  background: -moz-linear-gradient(top,  var(--bright) 0%, var(--dark) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top,  var(--bright) 0%,var(--dark) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom,  var(--bright) 0%,var(--dark) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#11e8bb', endColorstr='#8200c9',GradientType=0 ); /* IE6-9 */
+  overflow: hidden;
+}
+
 
 :root {
+  --bright: #e6a19e;
+  --dark: #5a548a;
   --overall-background: white;
-  --sidebar-col: lightgreen;
+  --sidebar-col: rgb(227, 227, 227);
   --icon-col: gray;
   --icon-hov: white;
   --tooltip-bg: gray;
@@ -13,7 +27,6 @@
 
 
 body {
-  background: var(--overall-background);
   padding: 0px;
   margin: 0px;
 }
