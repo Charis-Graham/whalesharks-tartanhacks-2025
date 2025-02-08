@@ -21,41 +21,36 @@ const effect = new OutlineEffect(renderer, {
 // water shader
 // const material = new THREE.MeshBasicMaterial( { color: 0x6ee2ff } );
 let pixelRatio = renderer.getPixelRatio();
-const waterShader = new THREE.ShaderMaterial({
-  uniforms: {
-    color: { value: new THREE.Color('rgb(110, 226, 255)') },
-    alpha: { value: 0.5 },
-    near: { value: camera.near },
-    far: { value: camera.far },
-    // resolution: { value: new THREE.Vector2(window.innerWidth*pixelRatio, window.innerHeight*pixelRatio) }
-  },
-  // attributes: {
-
-  // },
-  // color: 0x6ee2ff, 
-  transparent: true,
-  blending: THREE.NormalBlending,
-  // opacity: 0.5,
-  fragmentShader: `
+let waterColor = new THREE.Color('rgb(110, 226, 255)');
+const transparentWaterShader = new THREE.ShaderMaterial({
+    uniforms: {
+        color: { value: waterColor },
+        alpha: { value: 0.5 },
+    },
+    transparent: true, 
+    blending: THREE.NormalBlending,
+    fragmentShader: `
     uniform vec3 color;
-    uniform float alpha, near, far;
-    // uniform vec2 resolution;
+    uniform float alpha;
     void main() {
-
-        // vec2 uv = gl_FragCoord.xy / resolution; 
-        // eye depth:
-        // https://discourse.threejs.org/t/get-depth-in-fragment-shader/1831/3
-        // https://codesandbox.io/p/sandbox/gojcn?file=%2Fsrc%2Findex.js%3A164%2C26-164%2C32
-        // float fragDepth = (2.0 * near * far) / (far + near - gl_FragCoord.z * (far - near));
-        // float foamness = 1.0 - clamp(linearDepth, 0.0, 1.0);
-
         gl_FragColor.rgb = color;
-        // gl_FragColor.rgb += foamness * vec3(1.0, 1.0, 1.0);
         gl_FragColor.a = alpha;
-        // gl_FragColor = vec4(0.0, 1.0, 0.0, 1.0); // test with green
     }
     `
 });
+
+// ! start new code from Clytie
+let materialMaker = new CustomMaterials(camera, renderer, CustomMaterials.water_fragmentShader);
+// & stuff I used for testing perlin texture
+// let perlinTexture = new THREE.TextureLoader().load('textures/perlin.png');
+// perlinTexture.encoding = THREE.sRGBEncoding;
+// let white = new THREE.Color("white");
+// let black = new THREE.Color("black");
+// const waterShader = new THREE.MeshStandardMaterial({color:waterColor, map: perlinTexture, flatShading: true,});
+// & trying to get perlin foam on the water correctly
+materialMaker.vertexShader = CustomMaterials.water_vertexShader;
+const waterShader = materialMaker.instantiateShaderMaterial();
+// ! end new code from Clytie
 
 // dirt texture material
 // const dirtTexture = new THREE.TextureLoader().load( "textures/dirt_ground_texture__tileable___2048x2048__by_fabooguy_d7aopi7-414w-2x.jpg" );
@@ -218,7 +213,7 @@ function addTreesToHexes() {
 
 
 sea = new THREE.Mesh(
-  new THREE.CylinderGeometry(100, 100, .1, 50),
+  new THREE.CylinderGeometry(30,30,.3,50),
   waterShader
   /*new THREE.MeshPhysicalMaterial({
     color: new THREE.Color('rgb(110, 226, 255)'),
