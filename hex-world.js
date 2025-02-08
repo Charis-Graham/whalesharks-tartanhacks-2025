@@ -37,12 +37,11 @@ export class HexWorld {
   }
 
   generateRandom() {
-    if (!this.rand) return;
     const frequency = 0.1;
-    const amplitude = 4;
+    const amplitude = 5;
   
     for (const tile of this.tiles) {
-      const noiseValue = this.noise2D(tile.i * frequency, tile.j * frequency);
+      const noiseValue = this.noise2D(tileToPosition(tile.i, tile.j)[0] * frequency, tileToPosition(tile.i, tile.j)[1] * frequency);
       const newHeight = noiseValue * amplitude;
       tile.setHeight(this.snapToInterval(newHeight)); 
     }

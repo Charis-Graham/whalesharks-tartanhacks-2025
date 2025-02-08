@@ -1,3 +1,5 @@
+
+
 // SIDE BAR CODE
 function openMode() {
     document.getElementById("sidebar").style.width = "9%";
@@ -9,6 +11,9 @@ function closeMode() {
 
 let modeIsClick = true;
 let drawBorder = true;
+let hexWorld = null;
+let sea = null;
+
 function toggleBtn(togNum) {
    if (togNum == 1) {
        if (document.getElementById("toggle1").innerHTML == "arrow_selector_tool") {
@@ -31,7 +36,7 @@ function toggleBtn(togNum) {
 }
 
 function clickBtn(x){
-    if (x == 0) randomReset();
+    if (x == 1) hexWorld.generateRandom();
 }
 
 // Code to control switching modes of ui system
@@ -55,5 +60,6 @@ output.innerHTML = slider.value; // Display the default slider value
 // Update the current slider value (each time you drag the slider handle)
 slider.oninput = function() {
 	output.innerHTML = this.value;
+    sea.position.set(0, this.value/20, 0);
 }
 

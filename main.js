@@ -130,17 +130,14 @@ const land = dirtMaterial; // new THREE.MeshPhongMaterial({ color: 0x00ff00 , fl
 const water = waterShader; // new THREE.MeshPhongMaterial({ color: 0x0000ff , flatShading : true});
 
 
-const hexWorld = new HexWorld(land, true, false);
+hexWorld = new HexWorld(land, true, true);
 hexWorld.generateHexGrid(12, 12, 0);
 const tileMeshes = hexWorld.getTileMeshes();
 tileMeshes.forEach(mesh => scene.add(mesh));
 
-function randomReset(){
-  hexWorld.generateRandom();
-}
 
 
-let sea = new THREE.Mesh(
+sea = new THREE.Mesh(
   new THREE.CylinderGeometry(100,100,.1,50),
   waterShader
   /*new THREE.MeshPhysicalMaterial({
