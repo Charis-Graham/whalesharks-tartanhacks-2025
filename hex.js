@@ -13,6 +13,7 @@ export class Hex {
     this.geometry.translate(this.position2D.x, this.height * 0.5, this.position2D.y);
 
     this.mesh = new THREE.Mesh(this.geometry, this.material);
+    
     this.mesh.userData.tile = this;
   }
 

@@ -65,10 +65,16 @@ dirtTexture.encoding = THREE.sRGBEncoding;
 // dirtTexture.wrapT = THREE.RepeatWrapping;
 // dirtTexture.repeat.set( 4, 4 );
 
-const dirtMaterial = new THREE.MeshBasicMaterial();// MeshStandardMaterial();
-dirtMaterial.map = dirtTexture;
 
-// console.log(waterShader.uniforms.color.value); 
+let dirtColor = new THREE.Color('rgb(247, 190, 164)');
+let grassColor = new THREE.Color('rgb(108, 229, 112)');
+let rockColor = new THREE.Color('rgb(86, 86, 86)');
+const dirtMaterial = new THREE.MeshStandardMaterial({color:dirtColor, map: dirtTexture, flatShading: true,});
+const grassMaterial = new THREE.MeshStandardMaterial({color:grassColor, map: dirtTexture, flatShading: true,});
+const rockMaterial = new THREE.MeshStandardMaterial({color:rockColor, map: dirtTexture, flatShading: true,});
+
+
+
 
 const controls = new MapControls( camera, renderer.domElement );
 controls.enableDamping = true;
@@ -95,11 +101,15 @@ function onClick(event) {
   pointer.y = -((event.clientY - rect.top)  / rect.height) * 2 + 1;
     raycaster.setFromCamera(pointer, camera);
     const intersects = raycaster.intersectObjects(scene.children, false);
-    if (intersects.length > 0) {
-        const intersectedObject = intersects[0].object;
+    for (let i = 0; i < intersects.length; i++) {
+      const intersectedObject = intersects[i].object;
+      const tile = intersectedObject.userData.tile;
+  
+      if (tile && tile.land) {
 
-        const tile = intersectedObject.userData.tile;
-        if (tile && tile.land) tile.setHeight(((tile.getHeight+1) % 9) + 1);
+        tile.setHeight(((tile.getHeight + .5) % 9) + 1);
+        break;
+      }
     }
 }
 
@@ -107,9 +117,9 @@ function onClick(event) {
 camera.position.set(0, 40, 40);
 camera.lookAt(0, 0, 0);
 
-const ambientLight = new THREE.AmbientLight(0x404040, 0.5);
+const ambientLight = new THREE.AmbientLight(0xedd9c2, 1);
 scene.add(ambientLight);
-const dirLight = new THREE.DirectionalLight(0x404040, 0.5);
+const dirLight = new THREE.DirectionalLight(0xedd9c2, 3);
 dirLight.position.set(100, 100, 100);
 scene.add(dirLight);
 
@@ -119,9 +129,27 @@ const water = waterShader; // new THREE.MeshPhongMaterial({ color: 0x0000ff , fl
 
 
 const hexWorld = new HexWorld(land, true);
-hexWorld.generateHexGrid(8, 8, 0);
+hexWorld.generateHexGrid(15, 15, 0);
 const tileMeshes = hexWorld.getTileMeshes();
 tileMeshes.forEach(mesh => scene.add(mesh));
+
+let sea = new THREE.Mesh(
+  new THREE.CylinderGeometry(20,20,1,50),
+  waterShader
+  /*new THREE.MeshPhysicalMaterial({
+    color: new THREE.Color('rgb(110, 226, 255)'),
+    ior: 1.05,
+    transmission: 1,
+    transparent: true,
+    roughness: 1,
+    metalness: .0
+  })*/
+)
+
+sea.position.set(0, 0, 0);
+scene.add(sea);
+
+
 
 // const waterWorld = new HexWorld(water, false);
 // waterWorld.generateHexGrid(8, 8, 1);
