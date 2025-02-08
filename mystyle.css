@@ -7,38 +7,36 @@
   --tooltip-bg: gray;
   --navbar-col: lightgreen;
   --navbar-hov: gray;
+  --navbar-text: black;
+  --navbar-hov-text: black;
 }
 
 
 body {
   background: var(--overall-background);
   padding: 0px;
+  margin: 0px;
 }
 
 /* NAVBAR */
-ul {
-  position: fixed;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+.topnav {
   overflow: hidden;
   background-color: var(--navbar-col);
 }
 
-li {
+.topnav a {
   float: right;
-}
-
-li a {
-  display: block;
-  color: white;
+  color: var(--navbar-text);
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
+  font-size: 17px;
 }
 
-li a:hover {
+.topnav a:hover {
   background-color: var(--navbar-hov);
+  color: var(--navbar-hov-text);
+  border-radius: 15px;
 }
 
 /* SIDEBAR */
