@@ -5,13 +5,7 @@ import { OutlineEffect } from 'three/addons/effects/OutlineEffect.js';
 
 
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(
-  75, 
-  window.innerWidth / window.innerHeight, 
-  0.1, 
-  1000
-);
-
+const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 
 let renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 renderer.setClearColor(0xffffff, 1);
@@ -22,7 +16,47 @@ const effect = new OutlineEffect(renderer, {
   });
 
 
-const controls = new MapControls(camera, renderer.domElement);
+// const material = new THREE.MeshBasicMaterial( { color: 0x6ee2ff } );
+let pixelRatio = renderer.getPixelRatio();
+const material = new THREE.ShaderMaterial({
+    uniforms: {
+        color: { value: new THREE.Color('rgb(110, 226, 255)') },
+        alpha: { value: 0.5 },
+        near: {value: camera.near },
+        far: {value: camera.far },
+        // resolution: { value: new THREE.Vector2(window.innerWidth*pixelRatio, window.innerHeight*pixelRatio) }
+    },
+    // attributes: {
+        
+    // },
+    // color: 0x6ee2ff, 
+    transparent: true, 
+    blending: THREE.NormalBlending,
+    // opacity: 0.5,
+    fragmentShader: `
+    uniform vec3 color;
+    uniform float alpha, near, far;
+    // uniform vec2 resolution;
+    void main() {
+
+        // vec2 uv = gl_FragCoord.xy / resolution; 
+        // eye depth:
+        // https://discourse.threejs.org/t/get-depth-in-fragment-shader/1831/3
+        // https://codesandbox.io/p/sandbox/gojcn?file=%2Fsrc%2Findex.js%3A164%2C26-164%2C32
+        // float fragDepth = (2.0 * near * far) / (far + near - gl_FragCoord.z * (far - near));
+        // float foamness = 1.0 - clamp(linearDepth, 0.0, 1.0);
+
+        gl_FragColor.rgb = color;
+        // gl_FragColor.rgb += foamness * vec3(1.0, 1.0, 1.0);
+        gl_FragColor.a = alpha;
+        // gl_FragColor = vec4(0.0, 1.0, 0.0, 1.0); // test with green
+    }
+    `
+});
+
+console.log(material.uniforms.color.value); 
+
+const controls = new MapControls( camera, renderer.domElement );
 controls.enableDamping = true;
 
 
@@ -64,13 +98,13 @@ scene.add(dirLight);
 
 
 const land = new THREE.MeshPhongMaterial({ color: 0x00ff00 , flatShading : true});
-const water = new THREE.MeshPhongMaterial({ color: 0x0000ff , flatShading : true});
+const water = material; // new THREE.MeshPhongMaterial({ color: 0x0000ff , flatShading : true});
 
 
-const hexWorld = new HexWorld(land, true);
-hexWorld.generateHexGrid(8, 8, 1);
-const tileMeshes = hexWorld.getTileMeshes();
-tileMeshes.forEach(mesh => scene.add(mesh));
+// const hexWorld = new HexWorld(land, true);
+// hexWorld.generateHexGrid(8, 8, 1);
+// const tileMeshes = hexWorld.getTileMeshes();
+// tileMeshes.forEach(mesh => scene.add(mesh));
 
 const waterWorld = new HexWorld(water, false);
 waterWorld.generateHexGrid(8, 8, 1);
@@ -79,7 +113,19 @@ waterMeshes.forEach(mesh => scene.add(mesh));
 
 
 
+
+
 renderer.setAnimationLoop(animate);
+
+// add light
+// const light = new THREE.AmbientLight(); // soft white light
+// scene.add( light );
+
+// add cube to test depth
+// const geometry = new THREE.BoxGeometry( 1, 1, 1 );
+// const cubeMaterial = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+// const cube = new THREE.Mesh( geometry, cubeMaterial );
+// scene.add( cube );
 
 function animate() {
   controls.update();
