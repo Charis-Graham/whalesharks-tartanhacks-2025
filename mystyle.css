@@ -19,7 +19,7 @@ html {
   --sidebar-col: rgb(227, 227, 227);
   --icon-col: #a88095;
   --icon-hov: #745465;
-  --tooltip-bg: gray;
+  --tooltip-bg: rgb(163, 162, 162);
   --navbar-col: rgb(227, 227, 227);
   --navbar-icon: #a88095;
   --navbar-hov: #745465;
@@ -95,8 +95,8 @@ body {
 }
 
 #split {
-  color: var(--icon-hov);
-  padding:0px 0px 20px 40px;
+  color: var(--tooltip-bg);
+  padding:0px 0px 20px 17px;
 }
 
 /* Open side panel button */
