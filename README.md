@@ -11,3 +11,6 @@ To build HexWorld, we leveraged Node.js for backend functionality and Three.js f
 
 
 HexWorld is hosted through GoDaddy on Porkbun and is accessible at https://hexworld.co. Explore the endless possibilities of procedural world generation and bring your creative visions to life!
+
+Some image examples can be found on these google slides: https://docs.google.com/presentation/d/1JW96-Z8pq-D6tMIA4_9DqhlNl7aeWr_KcC5Fp2CoekA/edit?usp=sharing.
+
