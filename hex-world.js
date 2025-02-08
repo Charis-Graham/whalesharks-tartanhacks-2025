@@ -2,9 +2,14 @@ import * as THREE from 'three';
 import { Hex } from './hex.js';
 
 export class HexWorld {
-  constructor(defaultMaterial) {
+  constructor(defaultMaterial, land) {
     this.defaultMaterial = defaultMaterial; 
     this.tiles = [];
+    this.land = land
+  }
+
+  get onLand(){
+    return this.land;
   }
 
   tileToPosition(tileX, tileY) {

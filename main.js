@@ -48,7 +48,7 @@ function onClick(event) {
         const intersectedObject = intersects[0].object;
 
         const tile = intersectedObject.userData.tile;
-        if (tile) tile.setHeight(tile.getHeight+1);
+        if (tile && tile.land) tile.setHeight(tile.getHeight+1);
     }
 }
 
@@ -63,13 +63,19 @@ dirLight.position.set(100, 100, 100);
 scene.add(dirLight);
 
 
-const material = new THREE.MeshLambertMaterial({ color: 0x00ff00 });
+const land = new THREE.MeshPhongMaterial({ color: 0x00ff00 , flatShading : true});
+const water = new THREE.MeshPhongMaterial({ color: 0x0000ff , flatShading : true});
 
 
-const hexWorld = new HexWorld(material);
-hexWorld.generateHexGrid(8, 8, 3);
+const hexWorld = new HexWorld(land, true);
+hexWorld.generateHexGrid(8, 8, 1);
 const tileMeshes = hexWorld.getTileMeshes();
 tileMeshes.forEach(mesh => scene.add(mesh));
+
+const waterWorld = new HexWorld(water, false);
+waterWorld.generateHexGrid(8, 8, 1);
+const waterMeshes = waterWorld.getTileMeshes();
+waterMeshes.forEach(mesh => scene.add(mesh));
 
 
 

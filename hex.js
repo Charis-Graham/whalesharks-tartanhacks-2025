@@ -1,10 +1,11 @@
 import * as THREE from 'three';
 
 export class Hex {
-  constructor({ position, material, height = 3 }) {
+  constructor({ position, material, height = 3 , land = true}) {
     this.position2D = position.clone();
     this.material = material;
     this.height = height;
+    this.land = land;
 
 
     this.geometry = new THREE.CylinderGeometry(1, 1, this.height, 6, 1, false);
@@ -21,6 +22,10 @@ export class Hex {
 
   get getHeight () {
     return this.height;
+  }
+
+  get getLand () {
+    return this.land;
   }
 
   setHeight(newHeight) {
