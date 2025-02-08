@@ -7,14 +7,13 @@
 		<link rel="stylesheet" href="mystyle.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined">
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<body>
 		<script type="module" src="/main.js"></script>
 
 		<!-- Top nav bar -->
 		<div class="topnav">
 			<button href="javascript:void(0)">
-				<span class="material-symbols-outlined" style="font-size:33px;">share</span>
+				<span class="material-symbols-outlined" style="font-size:33px;">refresh</span>
 			</button>
 						
 			<button href="javascript:void(0)">
@@ -28,7 +27,7 @@
 
 			<!-- Landscaping -->
 			<div class = "tooltip">
-				<a href="javascript:void(0)">
+				<a href="javascript:void(0)" onclick="setMode('landscape')">
 					<span class="material-symbols-outlined" style="font-size:50px;">landscape</span>
 				</a>
 				<span class="tooltiptext">Landscape</span>
@@ -36,7 +35,7 @@
 			
 			<!-- Painting -->
 			<div class = "tooltip">
-				<a href="javascript:void(0)">
+				<a href="javascript:void(0)" onclick="setMode('painting')">
 					<span class="material-symbols-outlined" style="font-size:50px;">palette</span>
 				</a>
 				<span class="tooltiptext">Paint</span>
@@ -44,7 +43,7 @@
 			
 			<!-- Object Addition -->
 			<div class = "tooltip">
-				<a href="javascript:void(0)">
+				<a href="javascript:void(0)" onclick="setMode('decorate')">
 					<span class="material-symbols-outlined" style="font-size:50px;">forest</span>
 				</a>
 				<span class="tooltiptext">Decorate</span>
