@@ -65,10 +65,16 @@ dirtTexture.encoding = THREE.sRGBEncoding;
 // dirtTexture.wrapT = THREE.RepeatWrapping;
 // dirtTexture.repeat.set( 4, 4 );
 
-const dirtMaterial = new THREE.MeshBasicMaterial();// MeshStandardMaterial();
-dirtMaterial.map = dirtTexture;
 
-// console.log(waterShader.uniforms.color.value); 
+let dirtColor = new THREE.Color('rgb(247, 190, 164)');
+let grassColor = new THREE.Color('rgb(108, 229, 112)');
+let rockColor = new THREE.Color('rgb(86, 86, 86)');
+const dirtMaterial = new THREE.MeshStandardMaterial({color:dirtColor, map: dirtTexture, flatShading: true,});
+const grassMaterial = new THREE.MeshStandardMaterial({color:grassColor, map: dirtTexture, flatShading: true,});
+const rockMaterial = new THREE.MeshStandardMaterial({color:rockColor, map: dirtTexture, flatShading: true,});
+
+
+
 
 const controls = new MapControls( camera, renderer.domElement );
 controls.enableDamping = true;
@@ -77,6 +83,11 @@ controls.enableDamping = true;
 const raycaster = new THREE.Raycaster();
 const pointer = new THREE.Vector2();
 document.addEventListener('mousemove', onPointerMove, false);
+function onPointerMove(event) {
+  const rect = renderer.domElement.getBoundingClientRect();
+  pointer.x = ((event.clientX - rect.left) / rect.width)  * 2 - 1;
+  pointer.y = -((event.clientY - rect.top)  / rect.height) * 2 + 1;
+}
 
 
 window.addEventListener('resize', onWindowResize, false);
@@ -89,27 +100,28 @@ function onWindowResize() {
 document.addEventListener('click', onClick, false);
 function onClick(event) {
   const rect = renderer.domElement.getBoundingClientRect();
-  
-
   pointer.x = ((event.clientX - rect.left) / rect.width)  * 2 - 1;
   pointer.y = -((event.clientY - rect.top)  / rect.height) * 2 + 1;
     raycaster.setFromCamera(pointer, camera);
     const intersects = raycaster.intersectObjects(scene.children, false);
-    if (intersects.length > 0) {
-        const intersectedObject = intersects[0].object;
-
-        const tile = intersectedObject.userData.tile;
-        if (tile && tile.land) tile.setHeight(((tile.getHeight+0.5) % 9) + 0.25);
+    for (let i = 0; i < intersects.length; i++) {
+      const intersectedObject = intersects[i].object;
+      const tile = intersectedObject.userData.tile;
+      if (tile && tile.land) {
+        tile.setHeight(((tile.getHeight + .5) % 9) + 1);
+        break;
+      }
     }
 }
+
 
 
 camera.position.set(0, 40, 40);
 camera.lookAt(0, 0, 0);
 
-const ambientLight = new THREE.AmbientLight(0x404040, 0.5);
+const ambientLight = new THREE.AmbientLight(0xedd9c2, 1);
 scene.add(ambientLight);
-const dirLight = new THREE.DirectionalLight(0x404040, 0.5);
+const dirLight = new THREE.DirectionalLight(0xedd9c2, 3);
 dirLight.position.set(100, 100, 100);
 scene.add(dirLight);
 
@@ -118,57 +130,59 @@ const land = dirtMaterial; // new THREE.MeshPhongMaterial({ color: 0x00ff00 , fl
 const water = waterShader; // new THREE.MeshPhongMaterial({ color: 0x0000ff , flatShading : true});
 
 
-const hexWorld = new HexWorld(land, true);
-hexWorld.generateHexGrid(8, 8, 0);
+hexWorld = new HexWorld(land, true, false);
+hexWorld.generateHexGrid(12, 12, 0);
 const tileMeshes = hexWorld.getTileMeshes();
 tileMeshes.forEach(mesh => scene.add(mesh));
 
-// const waterWorld = new HexWorld(water, false);
-// waterWorld.generateHexGrid(8, 8, 1);
-// const waterMeshes = waterWorld.getTileMeshes();
-// waterMeshes.forEach(mesh => scene.add(mesh));
 
 
+sea = new THREE.Mesh(
+  new THREE.CylinderGeometry(100,100,.1,50),
+  waterShader
+  /*new THREE.MeshPhysicalMaterial({
+    color: new THREE.Color('rgb(110, 226, 255)'),
+    ior: 1.05,
+    transmission: 1,
+    transparent: true,
+    roughness: 1,
+    metalness: .0
+  })*/
+)
 
+sea.position.set(0, 0, 0);
+scene.add(sea);
 
 
 renderer.setAnimationLoop(animate);
 
-// add light
-// const light = new THREE.AmbientLight(); // soft white light
-// scene.add( light );
 
-// add cube to test depth
-// const geometry = new THREE.BoxGeometry( 1, 1, 1 );
-// const cubeMaterial = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-// const cube = new THREE.Mesh( geometry, cubeMaterial );
-// scene.add( cube );
+let intersect = null;
+let i = 0;
 
 function animate() {
   controls.update();
+  i += 1;
 
-    /*
-  raycaster.setFromCamera(pointer, camera);
-  const intersects = raycaster.intersectObjects(scene.children, false);
+  if (modeIsClick && i % 20 == 0){
+    raycaster.setFromCamera(pointer, camera);
 
-  if (intersects.length > 0) {
-    const intersectedObject = intersects[0].object;
-    const tile = intersectedObject.userData.tile; 
-    if (tile) {
-      tile.setHeight(5); // or any new height
+    const intersects = raycaster.intersectObjects(scene.children, false);
+    for (let i = 0; i < intersects.length; i++) {
+      const intersectedObject = intersects[i].object;
+      const tile = intersectedObject.userData.tile;
+      if (tile && tile.land) {
+        tile.setHeight(((tile.getHeight + .5) % 9) + 1);
+        break;
+      }
     }
+  }
+  
+  if (drawBorder){
+    effect.render(scene, camera);
   } else {
-    if (intersect) {
-      intersect.material.emissive.setHex(intersect.currentHex);
-      intersect = null;
-    }
-  }*/
-
-  effect.render(scene, camera);
+    renderer.render(scene, camera);
+  }
+  
 }
 
-
-function onPointerMove(event) {
-  pointer.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-  pointer.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-}

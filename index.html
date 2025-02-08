@@ -2,6 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 		<title>TileMap</title>
 		<link rel="stylesheet" href="mystyle.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -11,13 +12,17 @@
 
 		<!-- Top nav bar -->
 		<div class="topnav">
-			<a href="javascript:void(0)">
-				<span class="material-symbols-outlined" style="font-size:33px;">share</span>
-			</a>
+			<button href="javascript:void(0)">
+				<span class="material-symbols-outlined" onclick="clickBtn(2)" style="font-size:33px;">refresh</span>
+			</button>
 						
-			<a href="javascript:void(0)">
+			<button href="javascript:void(0)">
 				<span class="material-symbols-outlined" style="font-size:33px;">save</span>
-			</a>
+			</button>
+
+			<button href="javascript:void(0)">
+				<span class="material-symbols-outlined" onclick="clickBtn(1)" style="font-size:33px;">star</span>
+			</button>
 		</div>
 		
 		<!-- The sidebar -->
@@ -26,7 +31,7 @@
 
 			<!-- Landscaping -->
 			<div class = "tooltip">
-				<a href="javascript:void(0)">
+				<a href="javascript:void(0)" onclick="setMode('landscape')">
 					<span class="material-symbols-outlined" style="font-size:50px;">landscape</span>
 				</a>
 				<span class="tooltiptext">Landscape</span>
@@ -34,7 +39,7 @@
 			
 			<!-- Painting -->
 			<div class = "tooltip">
-				<a href="javascript:void(0)">
+				<a href="javascript:void(0)" onclick="setMode('painting')">
 					<span class="material-symbols-outlined" style="font-size:50px;">palette</span>
 				</a>
 				<span class="tooltiptext">Paint</span>
@@ -42,7 +47,7 @@
 			
 			<!-- Object Addition -->
 			<div class = "tooltip">
-				<a href="javascript:void(0)">
+				<a href="javascript:void(0)" onclick="setMode('decorate')">
 					<span class="material-symbols-outlined" style="font-size:50px;">forest</span>
 				</a>
 				<span class="tooltiptext">Decorate</span>
@@ -73,49 +78,19 @@
 			</span>
 		</button>
 
-		<!-- Javascript for side bar -->
-		<script>
-			function openMode() {
-			 	document.getElementById("sidebar").style.width = "9%";
-			}
-			
-			function closeMode() {
-				document.getElementById("sidebar").style.width = "0";
-			}
-
-			function toggleBtn(togNum) {
-				if (togNum == 1) {
-					if (document.getElementById("toggle1").innerHTML == "arrow_selector_tool") {
-						document.getElementById("toggle1").innerHTML = "drag_pan";
-					} else {
-						document.getElementById("toggle1").innerHTML = "arrow_selector_tool";
-					}
-				} else {
-					if (document.getElementById("toggle2").innerHTML == "border_clear") {
-						document.getElementById("toggle2").innerHTML = "border_outer";
-					} else {
-						document.getElementById("toggle2").innerHTML = "border_clear";
-					}
-				}
-				
-			}
-		</script>
-
 		<!-- SLIDER -->
 		<div class="slidecontainer">
-			<input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+			<input type="range" min="1" max="100" value="5" class="slider" id="slider">
+			<p id = "demo">50</p>
 		</div>
 
-		<script>
-			var slider = document.getElementById("myRange");
-			var output = document.getElementById("demo");
-			output.innerHTML = slider.value; // Display the default slider value
-
-			// Update the current slider value (each time you drag the slider handle)
-			slider.oninput = function() {
-			output.innerHTML = this.value;
-}
-		</script>
+		<!-- DISPLAY BOX -->
+		<div class="display-cnt">
+			<p>Hi.</p>
+		</div>
+		
+		<!-- Javascript for UI elements -->
+		<script src="./ui.js"></script>
 		
 	</body>
 </html>
