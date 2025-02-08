@@ -1,44 +1,56 @@
+html {
+  width: 100%;
+  height: 100%;
+  
+  background: #11e8bb; /* Old browsers */
+  background: -moz-linear-gradient(top,  var(--bright) 0%, var(--dark) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top,  var(--bright) 0%,var(--dark) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom,  var(--bright) 0%,var(--dark) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#11e8bb', endColorstr='#8200c9',GradientType=0 ); /* IE6-9 */
+  overflow: hidden;
+}
+
 
 :root {
+  --bright: #e6a19e;
+  --dark: #5a548a;
   --overall-background: white;
-  --sidebar-col: lightgreen;
+  --sidebar-col: rgb(227, 227, 227);
   --icon-col: gray;
   --icon-hov: white;
   --tooltip-bg: gray;
   --navbar-col: lightgreen;
-  --navbar-hov: gray;
+  --navbar-icon: black;
+  --navbar-hov: white;
 }
 
 
 body {
-  background: var(--overall-background);
   padding: 0px;
+  margin: 0px;
 }
 
 /* NAVBAR */
-ul {
-  position: fixed;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+.topnav {
   overflow: hidden;
   background-color: var(--navbar-col);
+  margin-right: 89%;
+  margin-left: 10px;
+  margin-top: 10px;
+  border-radius: 15px;
 }
 
-li {
-  float: right;
-}
-
-li a {
-  display: block;
-  color: white;
+.topnav a {
+  float: left;
+  color: var(--navbar-icon);
   text-align: center;
-  padding: 14px 16px;
+  padding: 14px 22px;
   text-decoration: none;
+  font-size: 17px;
 }
 
-li a:hover {
-  background-color: var(--navbar-hov);
+.topnav a:hover {
+  color: var(--navbar-hov);
 }
 
 /* SIDEBAR */
@@ -88,7 +100,13 @@ li a:hover {
   cursor: pointer;
   padding: 10px 15px;
   border-radius: 20px;
+  background-color: var(--sidebar-col);
+  color: var(--icon-col);
   border: none;
+}
+
+.openbtn:hover {
+  color: var(--icon-hov);
 }
 
 /* Icons for the sidebar */
