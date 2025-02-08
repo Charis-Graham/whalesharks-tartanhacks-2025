@@ -201,6 +201,19 @@ body {
   border-radius: 20px;
 }
 
+
+/* Content Container */
+.display-cnt {
+  position:absolute;
+  margin-top:18%;
+  margin-left:76%;
+  padding:150px;
+  background-color: var(--navbar-col);
+  overflow-x: hidden;
+  border:none;
+  border-radius: 20px;
+}
+
 /* Style the main content */
 .main {
   margin: 0px;
