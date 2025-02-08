@@ -7,6 +7,8 @@ function closeMode() {
    document.getElementById("sidebar").style.width = "0";
 }
 
+let modeIsClick = true;
+let drawBorder = true;
 function toggleBtn(togNum) {
    if (togNum == 1) {
        if (document.getElementById("toggle1").innerHTML == "arrow_selector_tool") {
@@ -28,8 +30,22 @@ function toggleBtn(togNum) {
    
 }
 
+function clickBtn(x){
+    if (x == 0) randomReset();
+}
+
 // Code to control switching modes of ui system
-function setMode(mode) {}
+function setMode(mode) {
+    if (mode == 'drag'){
+        modeIsClick = false;
+    } else if (mode == 'click') {
+        modeIsClick = true;
+    } else if (mode == 'border') {
+        drawBorder = true;
+    } else if (mode == 'noBorder'){
+        drawBorder = false;
+    }
+}
 
 //SLIDER CODE
 var slider = document.getElementById("slider");
