@@ -6,9 +6,8 @@
   --icon-hov: white;
   --tooltip-bg: gray;
   --navbar-col: lightgreen;
-  --navbar-hov: gray;
-  --navbar-text: black;
-  --navbar-hov-text: black;
+  --navbar-icon: black;
+  --navbar-hov: white;
 }
 
 
@@ -22,21 +21,23 @@ body {
 .topnav {
   overflow: hidden;
   background-color: var(--navbar-col);
+  margin-right: 89%;
+  margin-left: 10px;
+  margin-top: 10px;
+  border-radius: 15px;
 }
 
 .topnav a {
-  float: right;
-  color: var(--navbar-text);
+  float: left;
+  color: var(--navbar-icon);
   text-align: center;
-  padding: 14px 16px;
+  padding: 14px 22px;
   text-decoration: none;
   font-size: 17px;
 }
 
 .topnav a:hover {
-  background-color: var(--navbar-hov);
-  color: var(--navbar-hov-text);
-  border-radius: 15px;
+  color: var(--navbar-hov);
 }
 
 /* SIDEBAR */
@@ -86,7 +87,13 @@ body {
   cursor: pointer;
   padding: 10px 15px;
   border-radius: 20px;
+  background-color: var(--sidebar-col);
+  color: var(--icon-col);
   border: none;
+}
+
+.openbtn:hover {
+  color: var(--icon-hov);
 }
 
 /* Icons for the sidebar */
