@@ -37,6 +37,7 @@ function toggleBtn(togNum) {
 
 function clickBtn(x){
     if (x == 1) hexWorld.generateRandom();
+    if (x == 2) hexWorld.resetHexGrid();
 }
 
 // Code to control switching modes of ui system
@@ -60,6 +61,6 @@ output.innerHTML = slider.value; // Display the default slider value
 // Update the current slider value (each time you drag the slider handle)
 slider.oninput = function() {
 	output.innerHTML = this.value;
-    sea.position.set(0, this.value/20, 0);
+    sea.position.set(0, this.value/15, 0);
 }
 
