@@ -234,6 +234,7 @@ body {
   margin-left: 10px;
   border: var(--navbar-col);
   cursor: pointer;
+
 }
 
 #opt2 {
@@ -247,6 +248,7 @@ body {
   margin-left: 10px;
   border: var(--navbar-col);
   cursor: pointer;
+
 }
 
 #opt3 {

@@ -6,7 +6,7 @@ import { CustomMaterials } from './materials.js';
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader.js';
 
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
 let renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 renderer.setClearColor(0x000000, 0);
@@ -15,28 +15,28 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 
 document.body.appendChild(renderer.domElement);
 const effect = new OutlineEffect(renderer, {
-    defaultColor: [1.0, 1.0, 1.0],
-  });
+  defaultColor: [1.0, 1.0, 1.0],
+});
 
 // water shader
 // const material = new THREE.MeshBasicMaterial( { color: 0x6ee2ff } );
 let pixelRatio = renderer.getPixelRatio();
 const waterShader = new THREE.ShaderMaterial({
-    uniforms: {
-        color: { value: new THREE.Color('rgb(110, 226, 255)') },
-        alpha: { value: 0.5 },
-        near: {value: camera.near },
-        far: {value: camera.far },
-        // resolution: { value: new THREE.Vector2(window.innerWidth*pixelRatio, window.innerHeight*pixelRatio) }
-    },
-    // attributes: {
-        
-    // },
-    // color: 0x6ee2ff, 
-    transparent: true, 
-    blending: THREE.NormalBlending,
-    // opacity: 0.5,
-    fragmentShader: `
+  uniforms: {
+    color: { value: new THREE.Color('rgb(110, 226, 255)') },
+    alpha: { value: 0.5 },
+    near: { value: camera.near },
+    far: { value: camera.far },
+    // resolution: { value: new THREE.Vector2(window.innerWidth*pixelRatio, window.innerHeight*pixelRatio) }
+  },
+  // attributes: {
+
+  // },
+  // color: 0x6ee2ff, 
+  transparent: true,
+  blending: THREE.NormalBlending,
+  // opacity: 0.5,
+  fragmentShader: `
     uniform vec3 color;
     uniform float alpha, near, far;
     // uniform vec2 resolution;
@@ -60,7 +60,7 @@ const waterShader = new THREE.ShaderMaterial({
 // dirt texture material
 // const dirtTexture = new THREE.TextureLoader().load( "textures/dirt_ground_texture__tileable___2048x2048__by_fabooguy_d7aopi7-414w-2x.jpg" );
 // const dirtTexture = new THREE.TextureLoader().load( "textures/saturated_dirt.JPG" );
-const dirtTexture = new THREE.TextureLoader().load( "textures/unsaturated dirt.JPG" );
+const dirtTexture = new THREE.TextureLoader().load("textures/unsaturated dirt.JPG");
 // credit for original texture: https://www.deviantart.com/fabooguy/art/Dirt-Ground-Texture-Tileable-2048x2048-441212191
 dirtTexture.encoding = THREE.sRGBEncoding;
 
@@ -72,15 +72,15 @@ dirtTexture.encoding = THREE.sRGBEncoding;
 let dirtColor = new THREE.Color('rgb(247, 190, 164)');
 let grassColor = new THREE.Color('rgb(108, 229, 112)');
 let treeColor = new THREE.Color('rgb(77, 202, 164)');
-let rockColor = new THREE.Color('rgb(86, 86, 86)');
-const dirtMaterial = new THREE.MeshStandardMaterial({color:dirtColor, map: dirtTexture, flatShading: true,});
-const grassMaterial = new THREE.MeshStandardMaterial({color:grassColor, map: dirtTexture, flatShading: true,});
-const rockMaterial = new THREE.MeshStandardMaterial({color:rockColor, map: dirtTexture, flatShading: true,});
-const treeMaterial = new THREE.MeshStandardMaterial({color:treeColor, map: dirtTexture, flatShading: true,});
+let rockColor = new THREE.Color('rgb(187, 187, 187)');
+const dirtMaterial = new THREE.MeshStandardMaterial({ color: dirtColor, map: dirtTexture, flatShading: true, });
+const grassMaterial = new THREE.MeshStandardMaterial({ color: grassColor, map: dirtTexture, flatShading: true, });
+const rockMaterial = new THREE.MeshStandardMaterial({ color: rockColor, map: dirtTexture, flatShading: true, });
+const treeMaterial = new THREE.MeshStandardMaterial({ color: treeColor, map: dirtTexture, flatShading: true, });
 
 
 
-const controls = new MapControls( camera, renderer.domElement );
+const controls = new MapControls(camera, renderer.domElement);
 controls.enableDamping = true;
 
 
@@ -89,8 +89,8 @@ const pointer = new THREE.Vector2();
 document.addEventListener('mousemove', onPointerMove, false);
 function onPointerMove(event) {
   const rect = renderer.domElement.getBoundingClientRect();
-  pointer.x = ((event.clientX - rect.left) / rect.width)  * 2 - 1;
-  pointer.y = -((event.clientY - rect.top)  / rect.height) * 2 + 1;
+  pointer.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+  pointer.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
 }
 
 
@@ -104,26 +104,34 @@ function onWindowResize() {
 document.addEventListener('click', onClick, false);
 function onClick(event) {
   const rect = renderer.domElement.getBoundingClientRect();
-  pointer.x = ((event.clientX - rect.left) / rect.width)  * 2 - 1;
-  pointer.y = -((event.clientY - rect.top)  / rect.height) * 2 + 1;
-    raycaster.setFromCamera(pointer, camera);
-    raycaster.layers.set(0);
-    const intersects = raycaster.intersectObjects(scene.children, false);
-    for (let i = 0; i < intersects.length; i++) {
-      const intersectedObject = intersects[i].object;
-      const tile = intersectedObject.userData.tile;
-      if (tile && tile.land) {
+  pointer.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+  pointer.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+  raycaster.setFromCamera(pointer, camera);
+  raycaster.layers.set(0);
+  const intersects = raycaster.intersectObjects(scene.children, false);
+  for (let i = 0; i < intersects.length; i++) {
+    const intersectedObject = intersects[i].object;
+    const tile = intersectedObject.userData.tile;
+    if (tile && tile.land) {
 
-        if (modeSelection == 'painting'){
-          tile.setMaterial(dirtMaterial);
-        } else if (modeSelection == 'decorate'){
-          tile.setTreeVisible();
-        } else if (modeSelection == 'landscape'){
-          tile.setHeight(((tile.getHeight + .5) % 9) + 1);
+      if (modeSelection == 'painting') {
+        let selectedMaterial = null;
+        if (colorMode == 0) {
+          selectedMaterial = rockMaterial;
+        } else if (colorMode == 1) {
+          selectedMaterial = grassMaterial;
+        } else if (colorMode == 2) {
+          selectedMaterial = dirtMaterial;
         }
-        break;
+        tile.setMaterial(selectedMaterial);
+      } else if (modeSelection == 'decorate') {
+        tile.setTreeVisible();
+      } else if (modeSelection == 'landscape') {
+        tile.setHeight(((tile.getHeight + .5) % 9) + 1);
       }
+      break;
     }
+  }
 }
 
 
@@ -132,7 +140,7 @@ const loader = new FBXLoader();
 
 let treeModel = null;
 loader.load(
-  '/models/tree.fbx', 
+  '/models/tree.fbx',
   (object) => {
     // Prepare the tree model
     object.traverse((child) => {
@@ -146,10 +154,10 @@ loader.load(
       }
     });
     object.scale.set(0.01, 0.01, 0.01);
-    
+
     // Save the loaded tree model for later use
     treeModel = object;
-    
+
     // Now add a tree to each hex tile (if the hex grid is already generated)
     addTreesToHexes();
   },
@@ -178,7 +186,7 @@ const land = dirtMaterial; // new THREE.MeshPhongMaterial({ color: 0x00ff00 , fl
 const water = waterShader; // new THREE.MeshPhongMaterial({ color: 0x0000ff , flatShading : true});
 
 
-hexWorld = new HexWorld(grassMaterial, true, false);
+hexWorld = new HexWorld(rockMaterial, true, false);
 hexWorld.generateHexGrid(16, 16, 0);
 const tileMeshes = hexWorld.getTileMeshes();
 tileMeshes.forEach(mesh => scene.add(mesh));
@@ -198,7 +206,7 @@ function addTreesToHexes() {
         tile.height,
         tile.position2D.y
       );
-  
+
       tile.tree = treeClone;
       tile.tree.visible = false;
 
@@ -210,7 +218,7 @@ function addTreesToHexes() {
 
 
 sea = new THREE.Mesh(
-  new THREE.CylinderGeometry(100,100,.1,50),
+  new THREE.CylinderGeometry(100, 100, .1, 50),
   waterShader
   /*new THREE.MeshPhysicalMaterial({
     color: new THREE.Color('rgb(110, 226, 255)'),
@@ -236,11 +244,9 @@ function animate() {
   controls.update();
   i += 1;
 
-  if (!(modeIsClick) && i % 8 == 0){
+  if (!(modeIsClick) && i % 8 == 0) {
     raycaster.setFromCamera(pointer, camera);
     raycaster.layers.set(0);
-
-    console.log(modeSelection);
 
     const intersects = raycaster.intersectObjects(scene.children, false);
     for (let i = 0; i < intersects.length; i++) {
@@ -248,23 +254,31 @@ function animate() {
       const tile = intersectedObject.userData.tile;
       if (tile && tile.land) {
 
-        if (modeSelection == 'painting'){
-          tile.setMaterial(dirtMaterial);
-        } else if (modeSelection == 'decorate'){
+        if (modeSelection == 'painting') {
+          let selectedMaterial = null;
+          if (colorMode == 0) {
+            selectedMaterial = rockMaterial;
+          } else if (colorMode == 1) {
+            selectedMaterial = grassMaterial;
+          } else if (colorMode == 2) {
+            selectedMaterial = dirtMaterial;
+          }
+          tile.setMaterial(selectedMaterial);
+        } else if (modeSelection == 'decorate') {
           tile.setTreeVisible();
-        } else if (modeSelection == 'landscape'){
+        } else if (modeSelection == 'landscape') {
           tile.setHeight(((tile.getHeight + .5) % 9) + 1);
         }
         break;
       }
     }
   }
-  
-  if (drawBorder){
+
+  if (drawBorder) {
     effect.render(scene, camera);
   } else {
     renderer.render(scene, camera);
   }
-  
+
 }
 

@@ -12,6 +12,7 @@ let drawBorder = true;
 let hexWorld = null;
 let sea = null;
 let modeSelection = 'painting';
+let colorMode = 0;
 
 function toggleBtn(togNum) {
    if (togNum == 1) {
@@ -57,22 +58,27 @@ function setMode(mode) {
         landscape.style.color = "var(--navbar-hov)";
         painting.style.color  = "var(--navbar-icon)";
         decorate.style.color  = "var(--navbar-icon)";
+        modeSelection = "landscape";
     } else if (mode == "painting") {
         landscape.style.color = "var(--navbar-icon)";
         painting.style.color  = "var(--navbar-hov)";
         decorate.style.color  = "var(--navbar-icon)";
+        modeSelection = "painting";
     } else if (mode == "decorate") {
         landscape.style.color = "var(--navbar-icon)";
         painting.style.color  = "var(--navbar-icon)";
         decorate.style.color  = "var(--navbar-hov)";
+        modeSelection = "decorate";
     }
+
+    
 
     // Instead of display, toggle visibility so that the layout stays the same.
     var opt1 = document.getElementById("opt1");
     var opt2 = document.getElementById("opt2");
     var opt3 = document.getElementById("opt3");
 
-    if (mode === "decorate") {
+    if (mode == "painting") {
         opt1.style.visibility = "visible";
         opt2.style.visibility = "visible";
         opt3.style.visibility = "visible";
@@ -80,7 +86,7 @@ function setMode(mode) {
         opt1.style.pointerEvents = "auto";
         opt2.style.pointerEvents = "auto";
         opt3.style.pointerEvents = "auto";
-    } else {
+    } else if (mode == "decorate" || mode == "landscape"){
         opt1.style.visibility = "hidden";
         opt2.style.visibility = "hidden";
         opt3.style.visibility = "hidden";
@@ -114,6 +120,7 @@ function iconSetOne() {
     opt1.style.background = "var(--navbar-hov)";
     opt2.style.background = "var(--navbar-col)";
     opt3.style.background = "var(--navbar-col)";
+    colorMode = 0;
 }
 
 function iconSetTwo() {
@@ -124,6 +131,7 @@ function iconSetTwo() {
     opt1.style.background = "var(--navbar-col)";
     opt2.style.background = "var(--navbar-hov)";
     opt3.style.background = "var(--navbar-col)";
+    colorMode = 1;
 }
 
 function iconSetThree() {
@@ -134,6 +142,7 @@ function iconSetThree() {
     opt1.style.background = "var(--navbar-col)";
     opt2.style.background = "var(--navbar-col)";
     opt3.style.background = "var(--navbar-hov)";
+    colorMode = 2;
 }
 
         
