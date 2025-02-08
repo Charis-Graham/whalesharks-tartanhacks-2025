@@ -17,7 +17,7 @@ const effect = new OutlineEffect(renderer, {
 
 
 // const material = new THREE.MeshBasicMaterial( { color: 0x6ee2ff } );
-// let pixelRatio = renderer.getPixelRatio();
+let pixelRatio = renderer.getPixelRatio();
 const material = new THREE.ShaderMaterial({
     uniforms: {
         color: { value: new THREE.Color('rgb(110, 226, 255)') },
@@ -35,7 +35,7 @@ const material = new THREE.ShaderMaterial({
     // opacity: 0.5,
     fragmentShader: `
     uniform vec3 color;
-    uniform float alpha; //, near, far;
+    uniform float alpha, near, far;
     // uniform vec2 resolution;
     void main() {
 
@@ -56,7 +56,7 @@ const material = new THREE.ShaderMaterial({
 
 console.log(material.uniforms.color.value); 
 
-const controls = new MapControls(camera, renderer.domElement);
+const controls = new MapControls( camera, renderer.domElement );
 controls.enableDamping = true;
 
 
