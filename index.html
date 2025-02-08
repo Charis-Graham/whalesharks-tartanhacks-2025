@@ -7,6 +7,7 @@
 		<link rel="stylesheet" href="mystyle.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<body>
 		<script type="module" src="/main.js"></script>
 
@@ -74,50 +75,14 @@
 			</span>
 		</button>
 
-		<!-- Javascript for side bar -->
-		<script>
-			function openMode() {
-			 	document.getElementById("sidebar").style.width = "9%";
-			}
-			
-			function closeMode() {
-				document.getElementById("sidebar").style.width = "0";
-			}
-
-			function toggleBtn(togNum) {
-				if (togNum == 1) {
-					if (document.getElementById("toggle1").innerHTML == "arrow_selector_tool") {
-						document.getElementById("toggle1").innerHTML = "drag_pan";
-					} else {
-						document.getElementById("toggle1").innerHTML = "arrow_selector_tool";
-					}
-				} else {
-					if (document.getElementById("toggle2").innerHTML == "border_clear") {
-						document.getElementById("toggle2").innerHTML = "border_outer";
-					} else {
-						document.getElementById("toggle2").innerHTML = "border_clear";
-					}
-				}
-				
-			}
-		</script>
-
 		<!-- SLIDER -->
 		<div class="slidecontainer">
-			<input type="range" min="1" max="100" value="50" class="slider" id="slider">
+			<input type="range" min="1" max="100" value="5" class="slider" id="slider">
 			<p id = "demo">50</p>
 		</div>
-
-		<script>
-			var slider = document.getElementById("slider");
-			var output = document.getElementById("demo");
-			output.innerHTML = slider.value; // Display the default slider value
-
-			// Update the current slider value (each time you drag the slider handle)
-			slider.oninput = function() {
-			output.innerHTML = this.value;
-			}
-		</script>
+		
+		<!-- Javascript for UI elements -->
+		<script src="./ui.js"></script>
 		
 	</body>
 </html>
