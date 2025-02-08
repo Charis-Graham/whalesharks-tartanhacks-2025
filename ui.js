@@ -7,10 +7,11 @@ function closeMode() {
    document.getElementById("sidebar").style.width = "0";
 }
 
-let modeIsClick = true;
+let modeIsClick = false;
 let drawBorder = true;
 let hexWorld = null;
 let sea = null;
+let modeSelection = 'painting';
 
 function toggleBtn(togNum) {
    if (togNum == 1) {
@@ -44,9 +45,9 @@ function setMode(mode) {
     var painting = document.getElementById("active2");
     var decorate = document.getElementById("active3");
     if (mode == 'drag'){
-        modeIsClick = true;
-    } else if (mode == 'click') {
         modeIsClick = false;
+    } else if (mode == 'click') {
+        modeIsClick = true;
     } else if (mode == 'border') {
         drawBorder = true;
     } else if (mode == 'noBorder'){
