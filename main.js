@@ -107,6 +107,7 @@ function onClick(event) {
   pointer.x = ((event.clientX - rect.left) / rect.width)  * 2 - 1;
   pointer.y = -((event.clientY - rect.top)  / rect.height) * 2 + 1;
     raycaster.setFromCamera(pointer, camera);
+    raycaster.layers.set(0);
     const intersects = raycaster.intersectObjects(scene.children, false);
     for (let i = 0; i < intersects.length; i++) {
       const intersectedObject = intersects[i].object;
@@ -131,7 +132,10 @@ loader.load(
       if (child.isMesh) {
         child.castShadow = true;
         child.receiveShadow = true;
-        child.material = treeMaterial;
+        child.material[1] = treeMaterial;
+        child.material[0] = dirtMaterial;
+        child.material[0].needsUpdate = true;
+        child.material[1].needsUpdate = true;
       }
     });
     object.scale.set(0.01, 0.01, 0.01);
@@ -172,6 +176,30 @@ hexWorld.generateHexGrid(16, 16, 0);
 const tileMeshes = hexWorld.getTileMeshes();
 tileMeshes.forEach(mesh => scene.add(mesh));
 
+addTreesToHexes();
+function addTreesToHexes() {
+  if (!treeModel) return;
+
+  const treesGroup = new THREE.Group();
+  hexWorld.tiles.forEach(tile => {
+    if (tile.land) {
+      const treeClone = treeModel.clone(true);
+      treeClone.layers.set(1);
+
+      treeClone.position.set(
+        tile.position2D.x,
+        tile.height,
+        tile.position2D.y
+      );
+  
+      tile.tree = treeClone;
+      tile.tree.visible = false;
+
+      treesGroup.add(treeClone);
+    }
+  });
+  scene.add(treesGroup);
+}
 
 
 sea = new THREE.Mesh(
@@ -203,6 +231,7 @@ function animate() {
 
   if (modeIsClick && i % 20 == 0){
     raycaster.setFromCamera(pointer, camera);
+    raycaster.layers.set(0);
 
     const intersects = raycaster.intersectObjects(scene.children, false);
     for (let i = 0; i < intersects.length; i++) {

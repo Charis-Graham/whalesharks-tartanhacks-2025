@@ -11,12 +11,12 @@ export class Hex {
     
 
     this.extra = null
-    this.geometry = new THREE.CylinderGeometry(1, 1, this.height, 6, 1, false);
 
+    this.geometry = new THREE.CylinderGeometry(1, 1, this.height, 6, 1, false);
     this.geometry.translate(this.position2D.x, this.height * 0.5, this.position2D.y);
 
     this.mesh = new THREE.Mesh(this.geometry, this.material);
-    
+    this.mesh.layers.set(0);
     this.mesh.userData.tile = this;
   }
 
@@ -39,6 +39,16 @@ export class Hex {
     this.geometry = new THREE.CylinderGeometry(1, 1, this.height, 6, 1, false);
     this.geometry.translate(this.position2D.x, this.height * 0.5, this.position2D.y);
 
+    
+    if (this.tree) {
+
+      this.tree.position.set(
+        this.position2D.x,
+        this.height,
+        this.position2D.y
+      );
+      this.tree.visible = false;
+    }
 
     this.mesh.geometry = this.geometry;
   }
