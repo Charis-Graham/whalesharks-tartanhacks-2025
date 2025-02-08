@@ -1,42 +1,38 @@
 import * as THREE from 'three';
-import * as BufferGeometryUtils from 'three/addons/utils/BufferGeometryUtils.js';
 
 export class Hex {
-    constructor(material) {
-        this.material = material;
-        this.hexagonalGeometries = new THREE.BoxGeometry(0, 0, 0);
-    }
+  constructor({ position, material, height = 3 }) {
+    this.position2D = position.clone();
+    this.material = material;
+    this.height = height;
 
-    tileToPosition(tileX, tileY) {
-        return new THREE.Vector2(
-            (tileX + (tileY % 2) * 0.5) * 1.77,
-            tileY * 1.535
-        );
-    }
 
-    hexGeometry(height, position) {
-        const geo = new THREE.CylinderGeometry(1, 1, height, 6, 1, false);
-        geo.translate(position.x, height * 0.5, position.y);
-        return geo;
-    }
+    this.geometry = new THREE.CylinderGeometry(1, 1, this.height, 6, 1, false);
 
-    makeHex(height, position) {
-        const geo = this.hexGeometry(height, position);
-        this.hexagonalGeometries = BufferGeometryUtils.mergeGeometries([
-            this.hexagonalGeometries,
-            geo
-        ]);
-    }
+    this.geometry.translate(this.position2D.x, this.height * 0.5, this.position2D.y);
 
-    generateHexGrid(range = 10, maxDistance = 16, height = 3) {
-        for (let i = -range; i <= range; i++) {
-            for (let j = -range; j <= range; j++) {
-                const position = this.tileToPosition(i, j);
-                if (position.length() > maxDistance) continue;
-                this.makeHex(height, position);
-            }
-        }
-        
-        return new THREE.Mesh(this.hexagonalGeometries, this.material);
-    }
+    this.mesh = new THREE.Mesh(this.geometry, this.material);
+    this.mesh.userData.tile = this;
+  }
+
+  get object3D() {
+    return this.mesh;
+  }
+
+  get getHeight () {
+    return this.height;
+  }
+
+  setHeight(newHeight) {
+    this.height = newHeight;
+    this.geometry.dispose();
+
+    this.geometry = new THREE.CylinderGeometry(1, 1, this.height, 6, 1, false);
+    this.geometry.translate(this.position2D.x, this.height * 0.5, this.position2D.y);
+
+
+    this.mesh.geometry = this.geometry;
+  }
+
+  
 }
