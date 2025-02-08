@@ -1,106 +1,76 @@
 
-#app {
-    /*
-    Purple grey very good: 494D5F
-    Old: Montserrat, sans-serif;
-    serif;
-    
-    */
-    font-family: Times New Roman, serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: var(--dark-grey);
-    width: 100%;
-    height: 100%;
-    box-sizing: border-box;
-  }
-
-  :root {
-    --box-color: #f0f0f0;
-    --light-grey: #f1f1f1;
-    --mid-grey: #4d4d5d;
-    --dark-grey: #23232e;
-    --primary-bg-color: #fff;
-    --secondary-bg-color: #f8f9fa;
-    --heading-color: #7c87b1;
-    --blue-accent: #4d4d5d;
-    --header-height: 70px;
-    --light-blue-accent: #cde1e3;
-    --bright-accent: #acb6df;
+body {
+  background: black;
+  padding: 0px;
 }
 
-body { 
-    margin: 0; 
+/* Style the sidebar - fixed full height */
+.sidebar {
+  height: 65%;
+  width: 7%;
+  border-radius: 25px;
+  position: fixed;
+  z-index: 1;
+  top: 15%;
+  left: 0;
+  background-color: white;
+  overflow-x: hidden;
+  padding-top: 50px;
+  transition: 0.3s;
 }
 
-
-
-
-
-.btn {
-    border-color: var(--blue-accent);
-    color: var(--blue-accent);
-    border-radius: .25rem;
-    padding: .375rem .75rem;
-    border: 1px solid var(--blue-accent);
-    font-size: 16px;
-  }
-  
-  .btn:hover {
-    background-color: var(--blue-accent);
-    border-color: var(--blue-accent);
-    color: var(--primary-bg-color);
-  }
-  
-  .tooltip::after {
-    content: attr(data-tooltip);
-    visibility: hidden;
-    font-size: 22px;
-    background-color: var(--heading-color);
-    color: white;
-    text-align: center;
-    border-radius: 6px;
-    padding: 3px 3px;
-    position: absolute;
-    z-index: 1;
-    top: 125%;
-    left: 50%;
-    transform: translateX(-50%);
-    /* Center the tooltip */
-    opacity: 0;
-    transition: opacity 0.3s;
-    border-style: solid;
-    border-color: transparent transparent var(--bright-accent) transparent;
-  }
-  
-  .tooltip:hover::after {
-    visibility: visible;
-    opacity: 1;
-  
-  }
-  
-  .tooltip {
-    font-size: 12px;
-    padding: 5px 10px;
-    border-radius: 4px;
-  }
-
-button {
-    position: relative;
-    display: inline-block;
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 18px;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 4px;
+/* Style sidebar links */
+.sidebar a {
+  padding: 6px 8px 6px 25px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #818181;
+  display: block;
 }
 
+/* Style links on mouse-over */
+.sidebar a:hover {
+  color: #f1f1f1;
+}
 
+/* Position and style the close button */
+.sidebar .closebtn {
+  position: absolute;
+  top: 10px;
+  left: -10px;
+  font-size: 24px;
+  margin-left: 50px;
+}
+
+/* Open side panel button */
+.openbtn {
+  position: fixed;
+  top: 45%;
+  left: -9px;
+  cursor: pointer;
+  padding: 10px 15px;
+  border-radius: 20px;
+  border: none;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 10000,
+  'GRAD' 0,
+  'opsz' 24
+}
+
+/* Style the main content */
+.main {
+  margin-left: 160px; /* Same as the width of the sidenav */
+  padding: 0px 10px;
+}
+
+/* Add media queries for small screens (when the height of the screen is less than 450px, add a smaller padding and font-size) */
+@media screen and (max-height: 450px) {
+  .sidebar {padding-top: 15px;}
+  .sidebar a {font-size: 18px;}
+}
 
 

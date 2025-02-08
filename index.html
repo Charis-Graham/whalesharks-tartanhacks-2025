@@ -2,15 +2,73 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>My first three.js app</title>
+		<title>TileMap</title>
 		<link rel="stylesheet" href="mystyle.css">
-	</head>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined">
 	<body>
 		<script type="module" src="/main.js"></script>
-		<button class="btn btn-outline-secondary" @click="open('linkedin')">
+
+		<!-- <button class="btn btn-outline-secondary" @click="open('linkedin')">
             LinkedIn
             <i class="fab fa-linkedin"></i>
-          </button>
+        </button> -->
+
+		<!-- The sidebar -->
+		<div id = "sidebar" class="sidebar">
+			<a href="javascript:void(0)" class="closebtn" onclick="closeMode()" style="font-size:30px;" >&times;</a>
+			<a href="javascript:void(0)">
+				<span class="material-symbols-outlined" style="font-size:50px;">landscape</span>
+			</a>
+			<a href="javascript:void(0)">
+				<span class="material-symbols-outlined" style="font-size:50px;">palette</span>
+			</a>
+			<a href="javascript:void(0)">
+				<span class="material-symbols-outlined" style="font-size:50px;">forest</span>
+			</a>
+			<a href="javascript:void(0)">
+				<span id="toggle1" class="material-symbols-outlined" onclick="toggleBtn(1)" style="font-size:50px;">arrow_selector_tool</span>
+			</a>
+			<a href="javascript:void(0)">
+				<span id="toggle2" class="material-symbols-outlined" onclick="toggleBtn(2)" style="font-size:50px;">border_clear</span>
+			</a>
+		</div>
+
+		<button class="openbtn" onclick="openMode()">
+			<span class="material-symbols-outlined" style="font-size:50px;">
+				expand_circle_right
+			</span>
+		</button>
+
+		<script>
+			function openMode() {
+			 	document.getElementById("sidebar").style.width = "7%";
+			}
+			
+			function closeMode() {
+				document.getElementById("sidebar").style.width = "0";
+			}
+
+			function toggleBtn(togNum) {
+				if (togNum == 1) {
+					if (document.getElementById("toggle1").innerHTML == "arrow_selector_tool") {
+						document.getElementById("toggle1").innerHTML = "drag_pan";
+					} else {
+						document.getElementById("toggle1").innerHTML = "arrow_selector_tool";
+					}
+				} else {
+					if (document.getElementById("toggle2").innerHTML == "border_clear") {
+						document.getElementById("toggle2").innerHTML = "border_outer";
+					} else {
+						document.getElementById("toggle2").innerHTML = "border_clear";
+					}
+				}
+				
+				
+			}
+		</script>
+
+		
 	</body>
 </html>
 
