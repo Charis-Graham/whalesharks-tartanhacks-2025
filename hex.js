@@ -8,8 +8,9 @@ export class Hex {
     this.material = material;
     this.height = height;
     this.land = land;
+    
 
-
+    this.extra = null
     this.geometry = new THREE.CylinderGeometry(1, 1, this.height, 6, 1, false);
 
     this.geometry.translate(this.position2D.x, this.height * 0.5, this.position2D.y);
@@ -41,6 +42,5 @@ export class Hex {
 
     this.mesh.geometry = this.geometry;
   }
-
   
 }

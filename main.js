@@ -2,7 +2,8 @@ import * as THREE from 'three';
 import { MapControls } from 'three/addons/controls/MapControls.js';
 import { HexWorld } from './hex-world.js';
 import { OutlineEffect } from 'three/addons/effects/OutlineEffect.js';
-
+import { CustomMaterials } from './materials.js';
+import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader.js';
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
@@ -10,6 +11,7 @@ const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.inner
 let renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 renderer.setClearColor(0x000000, 0);
 renderer.setSize(window.innerWidth, window.innerHeight);
+//renderer.shadowMap.enabled = true;
 
 document.body.appendChild(renderer.domElement);
 const effect = new OutlineEffect(renderer, {
@@ -59,6 +61,7 @@ const waterShader = new THREE.ShaderMaterial({
 // const dirtTexture = new THREE.TextureLoader().load( "textures/dirt_ground_texture__tileable___2048x2048__by_fabooguy_d7aopi7-414w-2x.jpg" );
 // const dirtTexture = new THREE.TextureLoader().load( "textures/saturated_dirt.JPG" );
 const dirtTexture = new THREE.TextureLoader().load( "textures/unsaturated dirt.JPG" );
+// credit for original texture: https://www.deviantart.com/fabooguy/art/Dirt-Ground-Texture-Tileable-2048x2048-441212191
 dirtTexture.encoding = THREE.sRGBEncoding;
 
 // dirtTexture.wrapS = THREE.RepeatWrapping;
@@ -68,11 +71,12 @@ dirtTexture.encoding = THREE.sRGBEncoding;
 
 let dirtColor = new THREE.Color('rgb(247, 190, 164)');
 let grassColor = new THREE.Color('rgb(108, 229, 112)');
+let treeColor = new THREE.Color('rgb(77, 202, 164)');
 let rockColor = new THREE.Color('rgb(86, 86, 86)');
 const dirtMaterial = new THREE.MeshStandardMaterial({color:dirtColor, map: dirtTexture, flatShading: true,});
 const grassMaterial = new THREE.MeshStandardMaterial({color:grassColor, map: dirtTexture, flatShading: true,});
 const rockMaterial = new THREE.MeshStandardMaterial({color:rockColor, map: dirtTexture, flatShading: true,});
-
+const treeMaterial = new THREE.MeshStandardMaterial({color:treeColor, map: dirtTexture, flatShading: true,});
 
 
 
@@ -115,11 +119,44 @@ function onClick(event) {
 }
 
 
+//*
+const loader = new FBXLoader();
+
+let treeModel = null;
+loader.load(
+  '/models/tree.fbx', 
+  (object) => {
+    // Prepare the tree model
+    object.traverse((child) => {
+      if (child.isMesh) {
+        child.castShadow = true;
+        child.receiveShadow = true;
+        child.material = treeMaterial;
+      }
+    });
+    object.scale.set(0.01, 0.01, 0.01);
+    
+    // Save the loaded tree model for later use
+    treeModel = object;
+    
+    // Now add a tree to each hex tile (if the hex grid is already generated)
+    addTreesToHexes();
+  },
+  (xhr) => {
+    console.log(`FBX model ${(xhr.loaded / xhr.total) * 100}% loaded`);
+  },
+  (error) => {
+    console.error('An error occurred while loading the FBX file:', error);
+  }
+);
+
+
+
 
 camera.position.set(0, 40, 40);
 camera.lookAt(0, 0, 0);
 
-const ambientLight = new THREE.AmbientLight(0xedd9c2, 1);
+const ambientLight = new THREE.AmbientLight(0xedd9c2, .5);
 scene.add(ambientLight);
 const dirLight = new THREE.DirectionalLight(0xedd9c2, 3);
 dirLight.position.set(100, 100, 100);
