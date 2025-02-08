@@ -236,7 +236,7 @@ function animate() {
   controls.update();
   i += 1;
 
-  if (!(modeIsClick) && i % 5 == 0){
+  if (!(modeIsClick) && i % 8 == 0){
     raycaster.setFromCamera(pointer, camera);
     raycaster.layers.set(0);
 
