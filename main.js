@@ -99,7 +99,7 @@ function onClick(event) {
         const intersectedObject = intersects[0].object;
 
         const tile = intersectedObject.userData.tile;
-        if (tile && tile.land) tile.setHeight(((tile.getHeight+1) % 9) + 1);
+        if (tile && tile.land) tile.setHeight(((tile.getHeight+0.5) % 9) + 0.25);
     }
 }
 
