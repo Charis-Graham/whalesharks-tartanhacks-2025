@@ -130,8 +130,8 @@ const land = dirtMaterial; // new THREE.MeshPhongMaterial({ color: 0x00ff00 , fl
 const water = waterShader; // new THREE.MeshPhongMaterial({ color: 0x0000ff , flatShading : true});
 
 
-hexWorld = new HexWorld(land, true, true);
-hexWorld.generateHexGrid(12, 12, 0);
+hexWorld = new HexWorld(grassMaterial, true, false);
+hexWorld.generateHexGrid(16, 16, 0);
 const tileMeshes = hexWorld.getTileMeshes();
 tileMeshes.forEach(mesh => scene.add(mesh));
 

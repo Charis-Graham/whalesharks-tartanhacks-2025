@@ -8,7 +8,7 @@ export class HexWorld {
     this.tiles = [];
     this.land = land
     this.rand = rand
-    this.noise2D = createNoise2D(Math.random);
+    this.noise2D = null; 
     this.max = 9
     this.min = 1
     this.interval = .5
@@ -43,17 +43,21 @@ export class HexWorld {
   }
 
   generateRandom() {
+    this.noise2D = createNoise2D(Math.random);
     const frequency = 0.1;
     const amplitude = 4;
+    const off = 1;
   
     for (const tile of this.tiles) {
-      const noiseValue = this.noise2D(tileToPosition(tile.i, tile.j)[0] * frequency, tileToPosition(tile.i, tile.j)[1] * frequency);
+      const pos = this.tileToPosition(tile.i, tile.j);
+      const noiseValue = this.noise2D((pos.x + off) * frequency, (pos.y + off) * frequency);
       const newHeight = noiseValue * amplitude;
-      tile.setHeight(this.snapToInterval(newHeight)); 
+      tile.setHeight(this.snapToInterval(newHeight + 5)); 
     }
   }
 
   generateHexGrid(range = 4, maxDistance = 16, height = 2) {
+    this.noise2D = createNoise2D(Math.random);
     for (let i = -range; i <= range; i++) {
       for (let j = -range; j <= range; j++) {
         const position = this.tileToPosition(i, j);
@@ -69,6 +73,8 @@ export class HexWorld {
         }
 
         const tile = new Hex({
+          i,
+          j,
           position,
           material: tileMaterial,
           height
